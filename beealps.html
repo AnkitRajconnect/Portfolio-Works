@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeeAlp — GTM Strategy · Ankit Raj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0f0f0f;
+  --muted: #6b6b6b;
+  --light: #f5f3ef;
+  --bee: #0098a8;
+  --bee-dark: #006e7a;
+  --bee-light: #e0f7fa;
+  --bee-mid: #b2ebf2;
+  --white: #ffffff;
+  --border: #e2ddd6;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--light);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── Header ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245,243,239,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-back { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bee); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 90vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 120px 80px 80px;
+  gap: 80px;
+  background: linear-gradient(160deg, var(--bee-light) 0%, var(--light) 60%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute; right: -100px; top: 50%; transform: translateY(-50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,152,168,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bee); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-label::before { content: ''; width: 24px; height: 1px; background: var(--bee); }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 700; line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+.hero-title em { font-style: italic; color: var(--bee); }
+.hero-desc { font-size: 11px; color: var(--muted); line-height: 1.9; max-width: 400px; margin-bottom: 32px; }
+.hero-meta { display: flex; gap: 32px; }
+.meta-item { }
+.meta-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--bee); line-height: 1; }
+.meta-key { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+/* Hero Visual */
+.hero-visual {
+  display: flex; flex-direction: column; gap: 16px; align-items: flex-end;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+.stat-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 4px; padding: 20px 24px;
+  width: 280px;
+}
+.stat-card-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.stat-card-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
+.stat-card-val.bee { color: var(--bee); }
+.stat-card-sub { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.stat-card-bar { margin-top: 12px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.stat-card-fill { height: 100%; background: var(--bee); border-radius: 2px; }
+
+/* ── Index Nav ── */
+.index-nav {
+  background: white; border-bottom: 1px solid var(--border);
+  padding: 0 80px;
+  display: flex; gap: 0;
+  position: sticky; top: 57px; z-index: 90;
+  overflow-x: auto;
+}
+.index-nav::-webkit-scrollbar { display: none; }
+.index-link {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 18px 20px; color: var(--muted); text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+}
+.index-link:hover { color: var(--bee); border-color: var(--bee); }
+.index-link.active { color: var(--bee); border-color: var(--bee); }
+
+/* ── Main Content ── */
+main { max-width: 1100px; margin: 0 auto; padding: 80px 80px 120px; }
+
+/* ── Section ── */
+.section { margin-bottom: 100px; }
+.section-header { margin-bottom: 40px; display: flex; align-items: baseline; gap: 16px; }
+.section-num { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bee); }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 700; letter-spacing: -0.03em;
+}
+.section-rule { flex: 1; height: 1px; background: var(--border); }
+.section-sub { font-size: 11px; color: var(--muted); line-height: 1.8; max-width: 600px; margin-bottom: 32px; }
+
+/* ── Insight Cards ── */
+.cards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+.insight-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 4px; padding: 24px;
+}
+.insight-card-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 700; color: var(--bee); line-height: 1;
+  margin-bottom: 8px;
+}
+.insight-card-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.insight-card-desc { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.insight-card.accent { background: var(--bee-light); border-color: rgba(0,152,168,0.2); }
+.insight-card.dark { background: #0f2535; color: white; border-color: #0f2535; }
+.insight-card.dark .insight-card-label { color: rgba(255,255,255,0.5); }
+.insight-card.dark .insight-card-desc { color: rgba(255,255,255,0.7); }
+
+/* ── Competitor Grid ── */
+.competitor-table { width: 100%; border-collapse: collapse; }
+.competitor-table th {
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); padding: 10px 16px; text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+.competitor-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 11px; vertical-align: top; }
+.competitor-table tr:last-child td { border-bottom: none; }
+.competitor-table tr.highlight-row td { background: var(--bee-light); }
+.competitor-name { font-weight: 500; }
+.badge { display: inline-block; font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+.badge.green { background: #e8f5e9; color: #2e7d32; }
+.badge.red { background: #ffebee; color: #c62828; }
+.badge.amber { background: #fff8e1; color: #f57f17; }
+.badge.bee-b { background: var(--bee-light); color: var(--bee); }
+
+/* ── Audience Timeline ── */
+.timeline { position: relative; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px; background: var(--border); }
+.timeline-item { padding-left: 32px; padding-bottom: 36px; position: relative; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot { position: absolute; left: -5px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--bee); border: 2px solid var(--light); }
+.timeline-dot.muted { background: var(--border); }
+.timeline-phase { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bee); margin-bottom: 4px; }
+.timeline-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.timeline-desc { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.timeline-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.timeline-tag { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; border: 1px solid rgba(0,152,168,0.25); color: var(--bee); background: var(--bee-light); }
+
+/* ── Pricing Decline Visual ── */
+.pricing-visual {
+  background: #0f2535; border-radius: 6px; padding: 40px;
+  color: white; position: relative; overflow: hidden;
+}
+.pricing-visual::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,152,168,0.15) 0%, transparent 70%);
+}
+.pricing-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
+.pricing-tag { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.pricing-headline { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
+.pricing-ltv { text-align: right; }
+.pricing-ltv-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #4dd0e1; }
+.pricing-ltv-label { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+.pricing-bars { display: flex; gap: 8px; align-items: flex-end; height: 120px; margin-bottom: 16px; }
+.pricing-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+.pricing-bar { width: 100%; background: rgba(0,152,168,0.3); border-radius: 3px 3px 0 0; transition: all 0.3s; position: relative; }
+.pricing-bar:hover { background: rgba(0,152,168,0.6); }
+.pricing-bar-val { font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 700; color: #4dd0e1; }
+.pricing-bar-yr { font-size: 8px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; margin-top: 4px; }
+.pricing-activation { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 10px; color: rgba(255,255,255,0.6); }
+
+/* ── 5 Content Pillars ── */
+.pillar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.pillar {
+  background: white; border: 1px solid var(--border); border-radius: 4px;
+  padding: 20px 16px; position: relative; overflow: hidden;
+}
+.pillar::before { content: attr(data-num); position: absolute; top: -10px; right: 8px; font-family: 'Playfair Display', serif; font-size: 60px; font-weight: 700; color: rgba(0,152,168,0.05); line-height: 1; }
+.pillar-icon { font-size: 20px; margin-bottom: 10px; }
+.pillar-title { font-size: 11px; font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+.pillar-desc { font-size: 9px; color: var(--muted); line-height: 1.6; }
+
+/* ── AIDA Funnel ── */
+.funnel { display: flex; flex-direction: column; gap: 0; }
+.funnel-stage {
+  display: grid; grid-template-columns: 120px 1fr 1fr 140px;
+  gap: 20px; align-items: start;
+  padding: 24px 28px; border-radius: 4px; border: 1px solid var(--border);
+  background: white; margin-bottom: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.funnel-stage:hover { transform: translateX(4px); box-shadow: -4px 0 0 var(--bee); }
+.funnel-stage-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; }
+.funnel-stage-label.a { color: #0098a8; }
+.funnel-stage-label.i { color: #00838f; }
+.funnel-stage-label.d { color: #006064; }
+.funnel-stage-label.ac { color: #004d40; }
+.funnel-stage-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-top: 2px; }
+.funnel-content { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.funnel-channels { font-size: 9px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+.funnel-ch-tag { background: var(--light); padding: 3px 8px; border-radius: 2px; display: inline-block; width: fit-content; }
+.funnel-kpi { font-size: 10px; color: var(--bee); }
+.funnel-kpi-label { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+
+/* ── Crowdfunding Roadmap ── */
+.roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.roadmap-phase {
+  background: white; border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+}
+.roadmap-phase-header { padding: 20px 22px; background: var(--bee-light); border-bottom: 1px solid rgba(0,152,168,0.15); }
+.roadmap-phase-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bee); margin-bottom: 4px; }
+.roadmap-phase-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+.roadmap-phase-date { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.roadmap-phase-target { font-size: 22px; font-weight: 700; color: var(--bee); font-family: 'Playfair Display', serif; margin-top: 8px; }
+.roadmap-phase-body { padding: 20px 22px; }
+.roadmap-item { font-size: 10px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+.roadmap-item:last-child { border-bottom: none; }
+.roadmap-item::before { content: '→'; color: var(--bee); flex-shrink: 0; font-size: 10px; margin-top: 1px; }
+.roadmap-gate { margin-top: 16px; padding: 12px; background: var(--light); border-radius: 3px; }
+.roadmap-gate-label { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bee); margin-bottom: 6px; }
+.roadmap-gate-item { font-size: 9px; color: var(--muted); padding: 2px 0; display: flex; gap: 6px; }
+.roadmap-gate-item::before { content: '✓'; color: var(--bee); }
+
+/* ── Budget Chart ── */
+.budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.budget-table { background: white; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.budget-table table { width: 100%; border-collapse: collapse; }
+.budget-table th { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 12px 16px; background: var(--light); border-bottom: 1px solid var(--border); text-align: left; }
+.budget-table td { font-size: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.budget-table tr:last-child td { border-bottom: none; font-weight: 500; }
+.budget-table .total-row td { background: var(--bee-light); color: var(--bee); }
+.budget-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.budget-bar-label { font-size: 10px; width: 130px; flex-shrink: 0; }
+.budget-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.budget-bar-fill { height: 100%; background: var(--bee); border-radius: 3px; }
+.budget-bar-val { font-size: 10px; color: var(--muted); width: 60px; text-align: right; flex-shrink: 0; }
+
+/* ── Unit Economics ── */
+.econ-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.econ-card {
+  background: white; border: 1px solid var(--border); border-radius: 4px; padding: 24px;
+  text-align: center;
+}
+.econ-card.hero-card { background: var(--bee); border-color: var(--bee); color: white; }
+.econ-val { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; line-height: 1; }
+.econ-card.hero-card .econ-val { color: white; }
+.econ-val-bee { color: var(--bee); }
+.econ-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.econ-card.hero-card .econ-label { color: rgba(255,255,255,0.7); }
+.econ-desc { font-size: 10px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+
+/* ── Growth Engines ── */
+.engine-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.engine-card {
+  background: white; border: 1px solid var(--border); border-radius: 4px; padding: 28px 24px;
+  position: relative;
+}
+.engine-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+.engine-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.engine-desc { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.engine-bullet { font-size: 10px; color: var(--muted); padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; }
+.engine-bullet::before { content: '·'; color: var(--bee); font-size: 14px; line-height: 1; flex-shrink: 0; }
+
+/* ── Quote / Big Statement ── */
+.big-quote {
+  background: #0f2535; color: white; border-radius: 6px;
+  padding: 48px 60px; text-align: center;
+  margin-bottom: 100px;
+  position: relative; overflow: hidden;
+}
+.big-quote::before {
+  content: '"';
+  position: absolute; top: -20px; left: 40px;
+  font-family: 'Playfair Display', serif; font-size: 200px;
+  color: rgba(0,152,168,0.08); line-height: 1;
+  pointer-events: none;
+}
+.big-quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 36px); font-style: italic;
+  line-height: 1.3; position: relative; z-index: 1;
+  margin-bottom: 16px;
+}
+.big-quote-attr { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 40px; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; border-top: 1px solid var(--border); }
+.footer-nav { display: flex; justify-content: center; gap: 40px; margin-bottom: 16px; }
+.footer-nav a { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.footer-nav a:hover { color: var(--bee); }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 24px 60px; gap: 40px; }
+  main { padding: 60px 24px 80px; }
+  .index-nav { padding: 0 24px; }
+  .cards-2, .cards-3, .cards-4, .pillar-grid, .econ-grid, .engine-grid, .roadmap-grid { grid-template-columns: 1fr 1fr; }
+  .funnel-stage { grid-template-columns: 1fr; }
+  .budget-grid { grid-template-columns: 1fr; }
+  .big-quote { padding: 32px 24px; }
+  header { padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Ankit Raj</a>
+  <nav class="nav-links">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <a href="tonys.html">Tony's Corny</a>
+  </nav>
+</header>
+
+<!-- Sticky section nav -->
+<nav class="index-nav" id="section-nav">
+  <a href="#market" class="index-link active">Market</a>
+  <a href="#competition" class="index-link">Competition</a>
+  <a href="#audience" class="index-link">Audience</a>
+  <a href="#strategy" class="index-link">Strategy</a>
+  <a href="#content" class="index-link">Content</a>
+  <a href="#funnel" class="index-link">AIDA Funnel</a>
+  <a href="#roadmap" class="index-link">Roadmap</a>
+  <a href="#budget" class="index-link">Budget</a>
+  <a href="#growth" class="index-link">Growth</a>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-text" style="animation: fadeUp 0.7s ease both;">
+    <div class="hero-label">GTM Strategy · Crowdfunding · IMC</div>
+    <h1 class="hero-title">
+      Bee<em>Alp</em><br>Case Study
+    </h1>
+    <p class="hero-desc">
+      A full go-to-market strategy for a circular premium smartphone subscription entering the European market — including brand, content, AIDA funnel, crowdfunding roadmap, and €200K marketing budget for 2026.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-val">€500K</div>
+        <div class="meta-key">Crowdfunding Target</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">3</div>
+        <div class="meta-key">Phased Markets</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">7.6×</div>
+        <div class="meta-key">LTV / CAC Ratio</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stat-card">
+      <div class="stat-card-label">Unused Smartphones in EU</div>
+      <div class="stat-card-val bee" style="font-family:'Playfair Display',serif;font-weight:700;">642M</div>
+      <div class="stat-card-sub">market opportunity for circular model</div>
+      <div class="stat-card-bar"><div class="stat-card-fill" style="width:78%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Open to Refurbished</div>
+      <div class="stat-card-val bee" style="font-family:'Playfair Display',serif;font-weight:700;">55%</div>
+      <div class="stat-card-sub">of European consumers · growing 10-15%/yr</div>
+      <div class="stat-card-bar"><div class="stat-card-fill" style="width:55%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Average Replacement Cycle</div>
+      <div class="stat-card-val bee" style="font-family:'Playfair Display',serif;font-weight:700;">2.8 yrs</div>
+      <div class="stat-card-sub">vs. BeeAlp's 8-year lifecycle commitment</div>
+      <div class="stat-card-bar"><div class="stat-card-fill" style="width:35%"></div></div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- ── 1. Market Research ── -->
+  <section class="section reveal" id="market">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">Market Research</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">The European smartphone market has 85%+ penetration but is ripe for disruption. Consumer attitudes toward refurbished devices are shifting, and no player currently owns the circular-premium space.</p>
+    
+    <div class="cards-4" style="margin-bottom:24px;">
+      <div class="insight-card accent">
+        <div class="insight-card-num">85%+</div>
+        <div class="insight-card-label">Market Penetration</div>
+        <div class="insight-card-desc">Growth must come from switching and retention, not new users.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-num">642M</div>
+        <div class="insight-card-label">Unused EU Phones</div>
+        <div class="insight-card-desc">Dormant value sitting in drawers — circular model unlocks this resource.</div>
+      </div>
+      <div class="insight-card accent">
+        <div class="insight-card-num">55%</div>
+        <div class="insight-card-label">Open to Refurbished</div>
+        <div class="insight-card-desc">Consumer sentiment is ready. The barrier is quality perception, not concept.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-num">+15%</div>
+        <div class="insight-card-label">YoY Market Growth</div>
+        <div class="insight-card-desc">Refurbished smartphone market growing 10-15% annually across Europe.</div>
+      </div>
+    </div>
+
+    <div class="cards-2">
+      <div class="insight-card dark">
+        <div class="insight-card-label">Germany vs UK Insight</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:12px;color:white;">Trust drives adoption faster than sustainability</div>
+        <div class="insight-card-desc">Research showed reliability, value, and authenticity — not eco-messaging — are the primary trust attributes. Germany offers faster trust formation and higher early conversion. BeeAlp should lead with the 8-year commitment as proof of authenticity, pairing circularity with premium positioning — not the reverse.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-label">White Space Identified</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:12px;">No one owns circular + premium + sovereignty</div>
+        <div class="insight-card-desc">Apple and Samsung own premium but planned obsolescence. Fairphone owns circular but mid-range only. Back Market is a marketplace with variable quality. No competitor integrates flagship performance + circular subscription + European data sovereignty — BeeAlp's competitive opening.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. Competition ── -->
+  <section class="section reveal" id="competition">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2 class="section-title">Competitive Landscape</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Mapped six competitors across price, model type, and key gaps — to validate BeeAlp's positioning as the only circular-subscription play at flagship-tier performance.</p>
+
+    <table class="competitor-table">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Price</th>
+          <th>Model</th>
+          <th>Performance</th>
+          <th>Circular</th>
+          <th>Data Sovereignty</th>
+          <th>Gap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="competitor-name">Apple</span></td>
+          <td>€900–1,500+</td>
+          <td>Device sale</td>
+          <td><span class="badge green">Flagship</span></td>
+          <td><span class="badge red">No</span></td>
+          <td><span class="badge red">US servers</span></td>
+          <td>Planned obsolescence, US data dependency</td>
+        </tr>
+        <tr>
+          <td><span class="competitor-name">Samsung</span></td>
+          <td>€900–1,400</td>
+          <td>Device sale</td>
+          <td><span class="badge green">Flagship</span></td>
+          <td><span class="badge amber">Partial</span></td>
+          <td><span class="badge red">Mixed</span></td>
+          <td>Planned obsolescence, limited EU commitment</td>
+        </tr>
+        <tr>
+          <td><span class="competitor-name">Fairphone</span></td>
+          <td>€700–900</td>
+          <td>Device sale</td>
+          <td><span class="badge amber">Mid-range</span></td>
+          <td><span class="badge green">Yes</span></td>
+          <td><span class="badge amber">EU</span></td>
+          <td>Mid-range ceiling — cannot serve performance buyers</td>
+        </tr>
+        <tr>
+          <td><span class="competitor-name">Back Market</span></td>
+          <td>€300–900</td>
+          <td>Marketplace</td>
+          <td><span class="badge amber">Variable</span></td>
+          <td><span class="badge amber">Partial</span></td>
+          <td><span class="badge red">No</span></td>
+          <td>Variable quality, no ownership story</td>
+        </tr>
+        <tr>
+          <td><span class="competitor-name">Grover</span></td>
+          <td>€30–80/mo</td>
+          <td>Rental</td>
+          <td><span class="badge green">Flagship</span></td>
+          <td><span class="badge red">No</span></td>
+          <td><span class="badge red">No</span></td>
+          <td>No ownership, high long-term cost, not circular</td>
+        </tr>
+        <tr class="highlight-row">
+          <td><span class="competitor-name" style="color:var(--bee);">BeeAlp ↗</span></td>
+          <td>€24.99/mo → €4.99/mo</td>
+          <td>Subscription</td>
+          <td><span class="badge bee-b">Flagship</span></td>
+          <td><span class="badge bee-b">Full lifecycle</span></td>
+          <td><span class="badge bee-b">EU-only</span></td>
+          <td style="color:var(--bee);font-weight:500;">Unique position — no direct competitor</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── 3. Target Audience ── -->
+  <section class="section reveal" id="audience">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2 class="section-title">Audience Strategy</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">An 8-year phased audience model — starting with subscription-native early adopters, then expanding to TCO-sensitive Gen X, then the late majority. Each phase leverages the credibility built in the previous.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:40px;">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-phase">Years 1–3</div>
+          <div class="timeline-title">Gen Z & Millennials</div>
+          <div class="timeline-desc">Age 18–38. Subscription-native. High UGC potential. Flagship performance matters. Circular values resonate when paired with premium.</div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">Flagship Performance</span>
+            <span class="timeline-tag">UGC Driven</span>
+            <span class="timeline-tag">Instagram · TikTok</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-phase">Years 4–6</div>
+          <div class="timeline-title">Gen X</div>
+          <div class="timeline-desc">Age 39–55. TCO argument resonates. Reliability and referral-driven purchase behavior. Reached via LinkedIn and trusted community.</div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">TCO Argument</span>
+            <span class="timeline-tag">Referral-Led</span>
+            <span class="timeline-tag">LinkedIn</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot muted"></div>
+          <div class="timeline-phase">Year 7+</div>
+          <div class="timeline-title">Late Majority</div>
+          <div class="timeline-desc">€4.99/mo entry point. Family migration plans. Switching incentives. Mass-market credibility from previous phases enables this segment.</div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">€4.99/mo Entry</span>
+            <span class="timeline-tag">Family Migration</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="pricing-visual">
+          <div class="pricing-header">
+            <div>
+              <div class="pricing-tag">Subscription Pricing Model</div>
+              <div class="pricing-headline">The Never-Ending Premium Phone</div>
+            </div>
+            <div class="pricing-ltv">
+              <div class="pricing-ltv-num">€925</div>
+              <div class="pricing-ltv-label">8-Year LTV · 37% Margin</div>
+            </div>
+          </div>
+          <div class="pricing-bars">
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€24.99</div>
+              <div class="pricing-bar" style="height:100%"></div>
+              <div class="pricing-bar-yr">Yr 1</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€19.99</div>
+              <div class="pricing-bar" style="height:80%"></div>
+              <div class="pricing-bar-yr">Yr 2</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€14.99</div>
+              <div class="pricing-bar" style="height:60%"></div>
+              <div class="pricing-bar-yr">Yr 3</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€14.99</div>
+              <div class="pricing-bar" style="height:60%"></div>
+              <div class="pricing-bar-yr">Yr 4</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€9.99</div>
+              <div class="pricing-bar" style="height:40%"></div>
+              <div class="pricing-bar-yr">Yr 5</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€9.99</div>
+              <div class="pricing-bar" style="height:40%"></div>
+              <div class="pricing-bar-yr">Yr 6</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€4.99</div>
+              <div class="pricing-bar" style="height:20%"></div>
+              <div class="pricing-bar-yr">Yr 7</div>
+            </div>
+            <div class="pricing-bar-wrap">
+              <div class="pricing-bar-val">€4.99</div>
+              <div class="pricing-bar" style="height:20%"></div>
+              <div class="pricing-bar-yr">Yr 8</div>
+            </div>
+          </div>
+          <div class="pricing-activation" style="color:rgba(255,255,255,0.5);font-size:10px;">+ €99 one-time activation fee · Care included · 8-year software updates · EU data sovereignty · Modular repair</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. Strategy ── -->
+  <section class="section reveal" id="strategy">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2 class="section-title">Brand Strategy</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">The value proposition anchors everything. All communication channels, partnerships, and product decisions connect back to one idea.</p>
+
+    <div class="big-quote" style="margin-bottom:40px;">
+      <div class="big-quote-text">"The Never-Ending Premium Smartphone"</div>
+      <div class="big-quote-attr">BeeAlp Core Value Proposition</div>
+    </div>
+
+    <div class="cards-4">
+      <div class="insight-card accent">
+        <div class="insight-card-label">Pillar 1</div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">Performance That Lasts</div>
+        <div class="insight-card-desc">Snapdragon 8 Elite. EU-assembled. 8-year software commitment. Not a compromise device.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-label">Pillar 2</div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">Personal Ownership</div>
+        <div class="insight-card-desc">MyBee OS profile — the phone becomes yours. Saveable, portable identity layer that travels with you.</div>
+      </div>
+      <div class="insight-card accent">
+        <div class="insight-card-label">Pillar 3</div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">Care Included</div>
+        <div class="insight-card-desc">48h repair turnaround. Modular parts. Hardware covered. No anxiety about drops or faults.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-label">Pillar 4</div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">Accessible Premium</div>
+        <div class="insight-card-desc">Declining subscription makes flagship performance progressively more affordable — loyalty rewarded.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. Content Strategy ── -->
+  <section class="section reveal" id="content">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2 class="section-title">Content Strategy</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Five content pillars, each tied to a specific stage of the customer journey and a measurable trust-building objective. Communications are premium, confident, and transparent — never preachy.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar" data-num="1">
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-title">Premium Continuity</div>
+        <div class="pillar-desc">"Year 3, still fast." Long-form proof content showing performance over time.</div>
+      </div>
+      <div class="pillar" data-num="2">
+        <div class="pillar-icon">🪪</div>
+        <div class="pillar-title">Phone as Mine</div>
+        <div class="pillar-desc">MyBee Profile UGC. Personalisation stories. Endowment effect driving retention.</div>
+      </div>
+      <div class="pillar" data-num="3">
+        <div class="pillar-icon">🔧</div>
+        <div class="pillar-title">Care Included</div>
+        <div class="pillar-desc">Repair proof content. 48h turnaround. Behind-the-scenes service team stories.</div>
+      </div>
+      <div class="pillar" data-num="4">
+        <div class="pillar-icon">📊</div>
+        <div class="pillar-title">Smart Economics</div>
+        <div class="pillar-desc">Cost comparison reels. 8-year TCO vs. Apple. Data-led, never salesy.</div>
+      </div>
+      <div class="pillar" data-num="5">
+        <div class="pillar-icon">♻️</div>
+        <div class="pillar-title">Circular Proof</div>
+        <div class="pillar-desc">Lifecycle transparency — no greenwashing. Show the refurbishment process in real terms.</div>
+      </div>
+    </div>
+
+    <div class="insight-card" style="margin-top:24px;background:var(--light);">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+        <div>
+          <div class="insight-card-label">Voice Actors</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.7;margin-top:6px;">Founders (authentic voice) · Trusted Partners (credibility) · Tech Creators (reach) · Community Ambassadors (UGC)</div>
+        </div>
+        <div>
+          <div class="insight-card-label">Channels</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.7;margin-top:6px;">LinkedIn · Instagram · TikTok · X/Twitter · Discord Community · Newsletter</div>
+        </div>
+        <div>
+          <div class="insight-card-label">Frequency</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.7;margin-top:6px;">3–4×/week pre-campaign · Daily during September launch · Content repurposed into 6-month library</div>
+        </div>
+        <div>
+          <div class="insight-card-label">A/B Testing Rule</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.7;margin-top:6px;">Scale paid media only after CTR &gt;2%. If unmet → shift to earned media. Data-gated spend.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. AIDA Funnel ── -->
+  <section class="section reveal" id="funnel">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <h2 class="section-title">AIDA Social Media Funnel</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">A full-funnel social strategy aligned to the crowdfunding campaign. Each stage has defined content formats, channels, frequency, and measurable KPIs. Total social media budget: €45,000.</p>
+
+    <div class="funnel">
+      <div class="funnel-stage">
+        <div>
+          <div class="funnel-stage-label a">Awareness</div>
+          <div class="funnel-stage-name">Attention</div>
+        </div>
+        <div class="funnel-content">
+          Circular economy posts, founder story, EU data sovereignty debate. Broad reach plays — designed to build brand awareness and drive email sign-ups before the campaign launches.
+        </div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">LinkedIn · Instagram · X</div>
+            <div class="funnel-ch-tag">3–4× per week</div>
+          </div>
+        </div>
+        <div>
+          <div class="funnel-kpi-label">KPIs</div>
+          <div class="funnel-kpi">Reach · Followers<br>Email sign-ups</div>
+        </div>
+      </div>
+      <div class="funnel-stage">
+        <div>
+          <div class="funnel-stage-label i">Interest</div>
+          <div class="funnel-stage-name">Education</div>
+        </div>
+        <div class="funnel-content">
+          Explainer videos, lifecycle breakdown, cost comparison infographics. Deep-dive content for people who engaged in the awareness phase — moving from curious to informed.
+        </div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">LinkedIn · Newsletter</div>
+            <div class="funnel-ch-tag">3–4× per week</div>
+          </div>
+        </div>
+        <div>
+          <div class="funnel-kpi-label">KPIs</div>
+          <div class="funnel-kpi">Engagement rate<br>Time-on-content</div>
+        </div>
+      </div>
+      <div class="funnel-stage">
+        <div>
+          <div class="funnel-stage-label d">Desire</div>
+          <div class="funnel-stage-name">Validation</div>
+        </div>
+        <div class="funnel-content">
+          Prototype reveal, early testimonials, community polls. Social proof that converts emotional interest into waitlist registration — creating a community ahead of the campaign.
+        </div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">Instagram · Discord</div>
+            <div class="funnel-ch-tag">4× per week</div>
+          </div>
+        </div>
+        <div>
+          <div class="funnel-kpi-label">KPIs</div>
+          <div class="funnel-kpi">Waitlist growth<br>Community size</div>
+        </div>
+      </div>
+      <div class="funnel-stage">
+        <div>
+          <div class="funnel-stage-label ac">Action</div>
+          <div class="funnel-stage-name">Conversion</div>
+        </div>
+        <div class="funnel-content">
+          Launch video, early-bird offers, development roadmap reveal. Campaign goes live in September 2026. Target: 40% funded (€200K) on Day 1. 2,000+ backers needed from 30,000 warm contacts.
+        </div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">All channels</div>
+            <div class="funnel-ch-tag">Daily during campaign</div>
+          </div>
+        </div>
+        <div>
+          <div class="funnel-kpi-label">KPIs</div>
+          <div class="funnel-kpi">Conversion rate<br>Funds raised</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. Roadmap ── -->
+  <section class="section reveal" id="roadmap">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <h2 class="section-title">Crowdfunding Roadmap</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">A gate-based three-phase roadmap. Each phase has a clear capital target, set of objectives, and measurable gates that must pass before the next phase unlocks.</p>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-header">
+          <div class="roadmap-phase-label">Phase 1 · Pre-Seed</div>
+          <div class="roadmap-phase-name">Brand Foundation</div>
+          <div class="roadmap-phase-date">Now → May 2026</div>
+          <div class="roadmap-phase-target">€1.5M</div>
+        </div>
+        <div class="roadmap-phase-body">
+          <div class="roadmap-item">Brand identity operational — visual system, tone of voice, website live</div>
+          <div class="roadmap-item">Micro-campaigns in FR, DE, UK to seed community</div>
+          <div class="roadmap-item">Founder LinkedIn authority building (~€50K media equivalence)</div>
+          <div class="roadmap-item">Working prototype completed</div>
+          <div class="roadmap-item">Partner contracts signed (assembly + security)</div>
+          <div class="roadmap-gate">
+            <div class="roadmap-gate-label">Phase Gates</div>
+            <div class="roadmap-gate-item">≥5,000 email opt-ins across FR/DE/UK</div>
+            <div class="roadmap-gate-item">CTR ≥2% across paid campaigns</div>
+            <div class="roadmap-gate-item">Working prototype completed</div>
+            <div class="roadmap-gate-item">Partner contracts signed</div>
+          </div>
+        </div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-header">
+          <div class="roadmap-phase-label">Phase 2 · Seed</div>
+          <div class="roadmap-phase-name">Campaign Launch</div>
+          <div class="roadmap-phase-date">Q2–Q4 2026</div>
+          <div class="roadmap-phase-target">€3.5M</div>
+        </div>
+        <div class="roadmap-phase-body">
+          <div class="roadmap-item">CE certification achieved · D2C platform live at beealp.com</div>
+          <div class="roadmap-item">Pop-up activations in Berlin, Paris, London</div>
+          <div class="roadmap-item">B2B outreach to HR/IT directors via MEDDIC</div>
+          <div class="roadmap-item">September campaign: €500K target, 2,000+ backers</div>
+          <div class="roadmap-item">Day 1 target: 40% funded (€200K)</div>
+          <div class="roadmap-gate">
+            <div class="roadmap-gate-label">Phase Gates</div>
+            <div class="roadmap-gate-item">CE certified · D2C platform live</div>
+            <div class="roadmap-gate-item">30,000+ warm contacts pre-launch</div>
+            <div class="roadmap-gate-item">1 B2B pilot contract signed</div>
+            <div class="roadmap-gate-item">€500K raised in campaign</div>
+          </div>
+        </div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-header">
+          <div class="roadmap-phase-label">Phase 3 · Series A</div>
+          <div class="roadmap-phase-name">Scale</div>
+          <div class="roadmap-phase-date">2027+</div>
+          <div class="roadmap-phase-target">€20M</div>
+        </div>
+        <div class="roadmap-phase-body">
+          <div class="roadmap-item">50,000–100,000 subscribers across FR/DE/UK</div>
+          <div class="roadmap-item">Telecom partnerships: Orange, Vodafone, Deutsche Telekom</div>
+          <div class="roadmap-item">Student pricing + referral system at scale</div>
+          <div class="roadmap-item">76 FTEs · AI app v2 release</div>
+          <div class="roadmap-item">B2B corporate deployments expanding</div>
+          <div class="roadmap-gate">
+            <div class="roadmap-gate-label">Phase Gates</div>
+            <div class="roadmap-gate-item">50K+ subscribers</div>
+            <div class="roadmap-gate-item">CAC ≤€122 · Churn &lt;2%</div>
+            <div class="roadmap-gate-item">NPS &gt;60</div>
+            <div class="roadmap-gate-item">80%+ refurbishment rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. Budget ── -->
+  <section class="section reveal" id="budget">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <h2 class="section-title">Marketing Budget 2026</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">€200,000 total marketing budget allocated across four phases — front-loaded toward campaign month to maximise September conversion. Every spend justified by content output and media reach.</p>
+
+    <div class="budget-grid">
+      <div class="budget-table">
+        <table>
+          <thead><tr><th>Phase</th><th>Production</th><th>Media</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>Foundation (Mar–May)</td><td>€19,500</td><td>€7,300</td><td>€26,800</td></tr>
+            <tr><td>Pre-Campaign (Jun–Aug)</td><td>€30,000</td><td>€25,000</td><td>€55,000</td></tr>
+            <tr><td>Campaign (September)</td><td>€30,000</td><td>€45,000</td><td>€75,000</td></tr>
+            <tr><td>Post-Campaign (Oct–Dec)</td><td>€15,200</td><td>€6,000</td><td>€21,200</td></tr>
+            <tr><td>Agency / External</td><td colspan="2">—</td><td>€12,000</td></tr>
+            <tr><td>Contingency</td><td colspan="2">—</td><td>€10,000</td></tr>
+            <tr class="total-row"><td><strong>Total</strong></td><td colspan="2">—</td><td><strong>€200,000</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight-card" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="insight-card-label" style="margin-bottom:20px;">Budget Allocation by Phase</div>
+        <div class="budget-bar-row">
+          <div class="budget-bar-label">Foundation</div>
+          <div class="budget-bar-track"><div class="budget-bar-fill" style="width:13.4%"></div></div>
+          <div class="budget-bar-val">€26,800</div>
+        </div>
+        <div class="budget-bar-row">
+          <div class="budget-bar-label">Pre-Campaign</div>
+          <div class="budget-bar-track"><div class="budget-bar-fill" style="width:27.5%"></div></div>
+          <div class="budget-bar-val">€55,000</div>
+        </div>
+        <div class="budget-bar-row">
+          <div class="budget-bar-label">Campaign</div>
+          <div class="budget-bar-track"><div class="budget-bar-fill" style="width:37.5%"></div></div>
+          <div class="budget-bar-val">€75,000</div>
+        </div>
+        <div class="budget-bar-row">
+          <div class="budget-bar-label">Post-Campaign</div>
+          <div class="budget-bar-track"><div class="budget-bar-fill" style="width:10.6%"></div></div>
+          <div class="budget-bar-val">€21,200</div>
+        </div>
+        <div class="budget-bar-row">
+          <div class="budget-bar-label">Agency + Reserve</div>
+          <div class="budget-bar-track"><div class="budget-bar-fill" style="width:11%"></div></div>
+          <div class="budget-bar-val">€22,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. Growth & Unit Economics ── -->
+  <section class="section reveal" id="growth">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <h2 class="section-title">Growth Engines & Unit Economics</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Three mutually reinforcing growth systems — each lowering CAC while raising LTV. Underpinned by solid unit economics: a 7.6× LTV/CAC ratio and 18–24 month payback period.</p>
+
+    <div class="econ-grid" style="margin-bottom:40px;">
+      <div class="econ-card">
+        <div class="econ-val econ-val-bee">€925</div>
+        <div class="econ-label">8-Year LTV</div>
+        <div class="econ-desc">Total lifetime value over the full subscription arc, 37% gross margin</div>
+      </div>
+      <div class="econ-card hero-card">
+        <div class="econ-val">7.6×</div>
+        <div class="econ-label">LTV / CAC Ratio</div>
+        <div class="econ-desc">Well above the 3× benchmark for healthy subscription businesses</div>
+      </div>
+      <div class="econ-card">
+        <div class="econ-val econ-val-bee">€122</div>
+        <div class="econ-label">Target CAC</div>
+        <div class="econ-desc">18–24 month payback · Decreases as referral and B2B channels scale</div>
+      </div>
+    </div>
+
+    <div class="engine-grid">
+      <div class="engine-card">
+        <span class="engine-icon">🪪</span>
+        <div class="engine-name">MyBee Profile</div>
+        <div class="engine-bullet">Saveable OS layer — the phone becomes personal</div>
+        <div class="engine-bullet">UGC engine driving organic reach</div>
+        <div class="engine-bullet">Endowment effect reduces churn</div>
+        <div class="engine-bullet">Community sharing creates brand exposure</div>
+      </div>
+      <div class="engine-card">
+        <span class="engine-icon">🤝</span>
+        <div class="engine-name">Referral System</div>
+        <div class="engine-bullet">Premium rewards — not cash — for referrers</div>
+        <div class="engine-bullet">Priority support + early OS access as incentive</div>
+        <div class="engine-bullet">New customers receive reduced activation fee</div>
+        <div class="engine-bullet">Drives viral coefficient above 1.0</div>
+      </div>
+      <div class="engine-card">
+        <span class="engine-icon">🏢</span>
+        <div class="engine-name">B2B Corporate</div>
+        <div class="engine-bullet">~28% of EU companies provide phones to staff</div>
+        <div class="engine-bullet">MEDDIC sales qualification to HR/IT directors</div>
+        <div class="engine-bullet">Bulk deployments slash per-unit CAC dramatically</div>
+        <div class="engine-bullet">Enterprise contracts anchor recurring revenue</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-nav">
+    <a href="index.html">← All Work</a>
+    <a href="tonys.html">Next: Tony's Corny →</a>
+  </div>
+  Ankit Raj · Marketing Portfolio · 2026
+</footer>
+
+<script>
+// Scroll-reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.08 });
+reveals.forEach(r => observer.observe(r));
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.index-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
