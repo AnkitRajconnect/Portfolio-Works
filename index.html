@@ -341,13 +341,21 @@
     border-top: 1px solid var(--border);
   }
 
+  /* ── Mobile Optimization ── */
   @media (max-width: 768px) {
     .cards-grid { grid-template-columns: 1fr; }
     header { padding: 14px 20px; }
     .hero { padding: 100px 20px 80px; }
     .work-section { padding: 40px 20px 80px; }
-    .about-strip { flex-direction: column; gap: 20px; padding: 32px 20px; }
+    .about-strip { flex-direction: column; align-items: center; text-align: center; gap: 20px; padding: 32px 20px; }
+    .about-roles { justify-content: center; }
     .nav-links { display: none; }
+    
+    /* Keeps the visual tags inside the frame on smaller mobile screens */
+    .bee-float-tag { top: 10px; right: 10px; }
+    .bee-float-stat { bottom: 10px; left: 10px; }
+    .tony-float-tag { top: 10px; left: 10px; }
+    .tony-float-stat { bottom: 10px; right: 10px; }
   }
 </style>
 </head>
@@ -385,7 +393,6 @@
   <div class="section-label">Case Studies</div>
   <div class="cards-grid">
 
-    <!-- BeeAlp Card -->
     <a href="beealp.html" class="pcard bee-card">
       <div class="pcard-visual bee-visual">
         <div class="bee-visual-inner">
@@ -411,7 +418,6 @@
       </div>
     </a>
 
-    <!-- Tony's Card -->
     <a href="tonys.html" class="pcard tony-card">
       <div class="pcard-visual tony-visual">
         <div style="position:relative;display:inline-block;">
