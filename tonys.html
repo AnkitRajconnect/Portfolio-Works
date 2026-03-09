@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tony's Corny — Brand Extension · Ankit Raj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0f0f0f;
+  --muted: #6b6b6b;
+  --light: #f5f3ef;
+  --tony: #c41a0e;
+  --tony-dark: #8b1208;
+  --tony-light: #fff0ee;
+  --tony-mid: #fde8e0;
+  --white: #ffffff;
+  --border: #e2ddd6;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'IBM Plex Mono', monospace; background: var(--light); color: var(--ink); overflow-x: hidden; }
+
+/* ── Header ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245,243,239,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-back { color: var(--tony) !important; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 90vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 120px 80px 80px; gap: 80px;
+  background: linear-gradient(160deg, var(--tony-light) 0%, var(--light) 55%);
+  position: relative; overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute; right: -80px; top: 50%; transform: translateY(-50%);
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,26,14,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tony); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.hero-label::before { content: ''; width: 24px; height: 1px; background: var(--tony); }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(48px, 5.5vw, 76px); font-weight: 700; line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 24px; }
+.hero-title em { font-style: italic; color: var(--tony); }
+.hero-desc { font-size: 11px; color: var(--muted); line-height: 1.9; max-width: 400px; margin-bottom: 32px; }
+.hero-meta { display: flex; gap: 32px; }
+.meta-val { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--tony); line-height: 1; }
+.meta-key { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+/* Hero Bag Visual */
+.hero-visual { display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; animation: fadeUp 0.8s 0.2s ease both; }
+.bag-scene { position: relative; width: 300px; height: 380px; }
+.bag-main {
+  width: 200px; height: 300px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  background: linear-gradient(170deg, #e82010, #b5130a 60%, #8b0d08);
+  border-radius: 12px 12px 20px 20px;
+  box-shadow: 0 30px 80px rgba(196,26,14,0.3), 0 8px 24px rgba(0,0,0,0.15);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden; position: absolute;
+}
+.bag-main::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 48px;
+  background: rgba(0,0,0,0.2); clip-path: ellipse(55% 100% at 50% 0%);
+}
+.bag-label { text-align: center; position: relative; z-index: 1; }
+.bag-tony { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: white; letter-spacing: 0.05em; opacity: 0.85; }
+.bag-apostrophe { font-family: 'Playfair Display', serif; font-size: 10px; color: rgba(255,255,255,0.7); }
+.bag-name { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; line-height: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.bag-sub { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 6px; }
+.bag-cta-top {
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  color: white; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; white-space: nowrap; z-index: 2;
+}
+.bag-cta-side {
+  position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.4);
+  color: white; font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 8px; border-radius: 2px; white-space: nowrap; z-index: 2;
+  writing-mode: vertical-rl; text-orientation: mixed;
+}
+.bag-badge-fair { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 8px; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; white-space: nowrap; z-index: 2; }
+.float-tag {
+  position: absolute; background: white; border: 1px solid var(--border);
+  border-radius: 3px; padding: 8px 12px; font-size: 9px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.float-tag-1 { top: 20px; left: 0; }
+.float-tag-2 { bottom: 40px; right: 0; }
+.ft-val { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--tony); }
+.ft-label { font-size: 8px; color: var(--muted); letter-spacing: 0.06em; }
+
+/* ── Index Nav ── */
+.index-nav {
+  background: white; border-bottom: 1px solid var(--border);
+  padding: 0 80px; display: flex; gap: 0;
+  position: sticky; top: 57px; z-index: 90;
+  overflow-x: auto;
+}
+.index-nav::-webkit-scrollbar { display: none; }
+.index-link { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 18px 20px; color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+.index-link:hover { color: var(--tony); border-color: var(--tony); }
+.index-link.active { color: var(--tony); border-color: var(--tony); }
+
+/* ── Main ── */
+main { max-width: 1100px; margin: 0 auto; padding: 80px 80px 120px; }
+
+/* ── Sections ── */
+.section { margin-bottom: 100px; }
+.section-header { margin-bottom: 40px; display: flex; align-items: baseline; gap: 16px; }
+.section-num { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--tony); }
+.section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; letter-spacing: -0.03em; }
+.section-rule { flex: 1; height: 1px; background: var(--border); }
+.section-sub { font-size: 11px; color: var(--muted); line-height: 1.8; max-width: 600px; margin-bottom: 32px; }
+
+/* ── Cards ── */
+.cards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+.card {
+  background: white; border: 1px solid var(--border); border-radius: 4px; padding: 24px;
+}
+.card.accent { background: var(--tony-light); border-color: rgba(196,26,14,0.15); }
+.card.dark { background: #1a0606; color: white; border-color: #1a0606; }
+.card-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.card.dark .card-label { color: rgba(255,255,255,0.45); }
+.card-val { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--tony); line-height: 1; margin-bottom: 8px; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.card.dark .card-title { color: white; }
+.card-desc { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.card.dark .card-desc { color: rgba(255,255,255,0.65); }
+.card-bullet { font-size: 10px; color: var(--muted); padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; }
+.card-bullet::before { content: '→'; color: var(--tony); flex-shrink: 0; }
+
+/* ── Brand Problem ── */
+.problem-visual {
+  background: #1a0606; border-radius: 6px; padding: 48px;
+  color: white; position: relative; overflow: hidden;
+}
+.problem-visual::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,26,14,0.15) 0%, transparent 70%);
+}
+.prob-quote { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.5vw, 26px); font-style: italic; line-height: 1.4; max-width: 600px; margin-bottom: 16px; position: relative; z-index: 1; }
+.prob-attr { font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; }
+.prob-stats { display: flex; gap: 48px; margin-top: 32px; position: relative; z-index: 1; }
+.prob-stat-val { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #ef9a9a; }
+.prob-stat-label { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+/* ── Packaging CAD ── */
+.packaging-section {
+  background: white; border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+.packaging-header { background: #f9f7f4; border-bottom: 1px solid var(--border); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; }
+.packaging-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+.packaging-tag { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tony); }
+.packaging-body { display: grid; grid-template-columns: 1fr 1fr; }
+.pkg-panel { padding: 32px; }
+.pkg-panel:first-child { border-right: 1px solid var(--border); }
+
+/* CAD Diagram */
+.cad-diagram {
+  width: 100%; aspect-ratio: 3/4; max-width: 220px;
+  border: 2px solid var(--ink); border-radius: 8px 8px 16px 16px;
+  position: relative; background: white; margin: 0 auto 20px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.cad-top-flap {
+  position: absolute; top: -26px; left: -2px; right: -2px; height: 28px;
+  border: 2px solid var(--ink); border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: #f0f0f0;
+  display: flex; align-items: center; justify-content: center;
+}
+.cad-side-flap {
+  position: absolute; top: 20%; right: -28px; width: 30px;
+  height: 60%; border: 2px solid var(--ink); border-left: none;
+  border-radius: 0 4px 4px 0; background: #f8f8f8;
+  display: flex; align-items: center; justify-content: center;
+}
+.cad-label { font-size: 7px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+.cad-label.rotated { writing-mode: vertical-rl; transform: rotate(180deg); }
+.cad-body-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.cad-brand { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--ink); }
+.cad-product { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.cad-arrow { font-size: 18px; }
+.cad-annotation {
+  font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--tony); padding: 3px 8px; background: var(--tony-light);
+  border-radius: 2px; display: inline-block;
+}
+.cad-dimension-line {
+  position: absolute; border: 1px dashed rgba(0,0,0,0.15);
+}
+
+.pkg-cta-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 3px; font-size: 10px; font-weight: 500;
+  margin-bottom: 12px;
+}
+.pkg-cta-badge.solo { background: var(--ink); color: white; }
+.pkg-cta-badge.share { background: var(--tony); color: white; }
+.pkg-cta-arrow { font-size: 14px; }
+.pkg-logic-item { font-size: 10px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; line-height: 1.5; }
+.pkg-logic-item:last-child { border-bottom: none; }
+.pkg-logic-icon { flex-shrink: 0; }
+
+/* ── 4 Pillars ── */
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.pillar-card {
+  background: white; border: 1px solid var(--border); border-radius: 4px;
+  overflow: hidden; position: relative;
+}
+.pillar-card::before { content: attr(data-num); position: absolute; bottom: -10px; right: 8px; font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 700; color: rgba(196,26,14,0.04); line-height: 1; }
+.pillar-header { background: var(--tony-light); padding: 20px 20px 16px; border-bottom: 1px solid rgba(196,26,14,0.1); }
+.pillar-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.pillar-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; }
+.pillar-body { padding: 16px 20px; }
+.pillar-problem { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tony); margin-bottom: 6px; }
+.pillar-problem-text { font-size: 10px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+.pillar-solution-label { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: #2e7d32; margin-bottom: 6px; }
+.pillar-solution-text { font-size: 10px; color: var(--ink); line-height: 1.7; }
+
+/* ── Product Differentiation ── */
+.diff-table { width: 100%; border-collapse: collapse; }
+.diff-table th { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+.diff-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 11px; vertical-align: middle; }
+.diff-table tr:last-child td { border-bottom: none; }
+.diff-table tr.tony-row td { background: var(--tony-light); }
+.badge { display: inline-block; font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+.badge.green { background: #e8f5e9; color: #2e7d32; }
+.badge.red { background: #ffebee; color: #c62828; }
+.badge.tony-b { background: var(--tony-light); color: var(--tony); }
+
+/* ── Audience Segments ── */
+.segment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.segment-card { background: white; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.seg-header { padding: 20px 22px 16px; }
+.seg-num { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tony); margin-bottom: 6px; }
+.seg-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+.seg-tagline { font-size: 10px; color: var(--muted); margin-top: 4px; font-style: italic; }
+.seg-body { padding: 16px 22px; border-top: 1px solid var(--border); }
+.seg-item { font-size: 10px; color: var(--muted); padding: 4px 0; display: flex; gap: 8px; }
+.seg-item::before { content: '·'; color: var(--tony); font-size: 14px; line-height: 1; flex-shrink: 0; }
+.seg-competitor { margin-top: 12px; padding: 8px; background: var(--light); border-radius: 2px; font-size: 9px; color: var(--muted); }
+.seg-competitor strong { color: var(--tony); }
+
+/* ── AIDA Funnel ── */
+.funnel-row {
+  display: grid; grid-template-columns: 100px 1fr 1fr 130px;
+  gap: 20px; align-items: start;
+  padding: 24px 28px; border-radius: 4px; border: 1px solid var(--border);
+  background: white; margin-bottom: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.funnel-row:hover { transform: translateX(4px); box-shadow: -4px 0 0 var(--tony); }
+.funnel-letter { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: rgba(196,26,14,0.15); line-height: 1; }
+.funnel-stage-head { }
+.funnel-stage-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--tony); }
+.funnel-stage-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-top: 2px; }
+.funnel-content { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.funnel-channels { font-size: 9px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+.funnel-ch-tag { background: var(--light); padding: 3px 8px; border-radius: 2px; display: inline-block; width: fit-content; }
+.funnel-kpi { font-size: 10px; color: var(--tony); }
+.funnel-kpi-label { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+
+/* ── Creative Campaigns ── */
+.campaign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.campaign-card { background: white; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+.campaign-visual {
+  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.campaign-body { padding: 20px 22px; }
+.campaign-type { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tony); margin-bottom: 6px; }
+.campaign-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.campaign-desc { font-size: 10px; color: var(--muted); line-height: 1.7; }
+
+/* Social Post Mockups */
+.post-ig {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.post-no-more {
+  background: #1565c0;
+  flex-direction: column; gap: 0;
+}
+.post-no-more-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: white;
+  line-height: 0.9; text-align: center;
+}
+.post-no-more-sub { font-size: 10px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 10px; }
+.post-items-row { display: flex; gap: 12px; align-items: center; }
+.post-choc { width: 60px; height: 90px; background: linear-gradient(170deg, #5d4037, #4e342e); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.post-plus { font-family: 'Playfair Display', serif; font-size: 24px; color: white; font-weight: 700; }
+.post-bag { width: 50px; height: 80px; background: linear-gradient(170deg, #e82010, #b5130a); border-radius: 6px 6px 10px 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.post-bag-txt { font-size: 8px; font-weight: 700; color: white; text-align: center; line-height: 1.1; font-family: 'Playfair Display', serif; }
+
+.post-fairpay { background: #fff8f0; flex-direction: column; gap: 10px; }
+.post-hand { font-size: 56px; }
+.post-fp-tag { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #e65100; }
+.post-fp-sub { font-size: 9px; color: #bf360c; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.post-water { background: #e3f2fd; flex-direction: column; gap: 8px; }
+.post-corn-cry { font-size: 52px; }
+.post-w-tag { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: #1565c0; }
+.post-w-sub { font-size: 9px; color: #0d47a1; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.post-friends { background: linear-gradient(135deg, #fff9f0 0%, #fff0ee 100%); flex-direction: column; gap: 8px; }
+.post-friends-icons { font-size: 32px; }
+.post-friends-tag { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--tony); }
+.post-friends-sub { font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Ethical Cycle ── */
+.cycle-visual {
+  background: white; border: 1px solid var(--border); border-radius: 6px; padding: 48px;
+  display: flex; gap: 0; align-items: center; justify-content: center;
+}
+.cycle-node { text-align: center; flex: 1; }
+.cycle-icon { font-size: 32px; margin-bottom: 12px; }
+.cycle-name { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.cycle-desc { font-size: 9px; color: var(--muted); line-height: 1.6; max-width: 120px; margin: 0 auto; }
+.cycle-arrow { font-size: 24px; color: var(--tony); padding: 0 8px; margin-top: -40px; flex-shrink: 0; }
+
+/* ── Quote ── */
+.big-statement {
+  background: #1a0606; color: white; border-radius: 6px; padding: 48px 60px;
+  text-align: center; margin-bottom: 100px; position: relative; overflow: hidden;
+}
+.big-statement::before { content: '"'; position: absolute; top: -20px; left: 40px; font-family: 'Playfair Display', serif; font-size: 200px; color: rgba(196,26,14,0.1); line-height: 1; pointer-events: none; }
+.big-statement-text { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.5vw, 28px); font-style: italic; line-height: 1.4; max-width: 700px; margin: 0 auto 16px; position: relative; z-index: 1; }
+.big-statement-attr { font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Animations ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 40px; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; border-top: 1px solid var(--border); }
+.footer-nav { display: flex; justify-content: center; gap: 40px; margin-bottom: 16px; }
+.footer-nav a { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.footer-nav a:hover { color: var(--tony); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 24px 60px; gap: 40px; }
+  main { padding: 60px 24px 80px; }
+  .index-nav { padding: 0 24px; }
+  .cards-2, .cards-3, .cards-4, .pillars-grid, .segment-grid, .campaign-grid { grid-template-columns: 1fr 1fr; }
+  .funnel-row { grid-template-columns: 1fr; }
+  .packaging-body { grid-template-columns: 1fr; }
+  .big-statement { padding: 32px 24px; }
+  header { padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Ankit Raj</a>
+  <nav class="nav-links">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <a href="beealp.html">BeeAlp</a>
+  </nav>
+</header>
+
+<nav class="index-nav" id="section-nav">
+  <a href="#brand" class="index-link active">Brand</a>
+  <a href="#problem" class="index-link">Problem</a>
+  <a href="#product" class="index-link">Product</a>
+  <a href="#packaging" class="index-link">Packaging</a>
+  <a href="#pillars" class="index-link">4 Pillars</a>
+  <a href="#audience" class="index-link">Audience</a>
+  <a href="#funnel" class="index-link">AIDA Funnel</a>
+  <a href="#campaigns" class="index-link">Campaigns</a>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div style="animation: fadeUp 0.7s ease both;">
+    <div class="hero-label">Brand Extension · IMC · Social Strategy</div>
+    <h1 class="hero-title">
+      Tony's<br><em>Corny</em>
+    </h1>
+    <p class="hero-desc">
+      Brand extension strategy for Tony's Chocolonely entering the European salty snack market — applying the same slave-free sourcing model to corn. From product design and packaging to IMC and social campaigns.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-val">3</div>
+        <div class="meta-key">Target Segments</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">4</div>
+        <div class="meta-key">Sourcing Pillars</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">2</div>
+        <div class="meta-key">CTA Opens</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="bag-scene">
+      <div class="bag-main" style="left:50%;top:50%;transform:translate(-50%,-50%);">
+        <div class="bag-cta-top">↑ Pull to Snack Solo!</div>
+        <div class="bag-cta-side">← Pull to Make #Friends</div>
+        <div class="bag-label">
+          <div class="bag-tony">TONY'S</div>
+          <div class="bag-name">CORNY</div>
+          <div class="bag-sub">Double Thick · Stone Ground</div>
+        </div>
+        <div class="bag-badge-fair">🌽 Fair Pay Corn</div>
+      </div>
+      <div class="float-tag float-tag-1">
+        <div class="ft-val">100%</div>
+        <div class="ft-label">Traceable Supply Chain</div>
+      </div>
+      <div class="float-tag float-tag-2">
+        <div class="ft-val">3</div>
+        <div class="ft-label">Clean Ingredients Only</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- ── 1. Brand Foundation ── -->
+  <section class="section reveal" id="brand">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">Brand Foundation</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Tony's Chocolonely is a Dutch mission-driven chocolate brand founded in 2005 by journalist Teun "Tony" van de Keuken after he exposed child labour in the cocoa supply chain. A B Corp with a single goal: make "100% slave-free" the norm across the entire chocolate industry — not just their own bars.</p>
+
+    <div class="cards-2" style="margin-bottom:24px;">
+      <div class="card dark">
+        <div class="card-label">The Origin Story</div>
+        <div class="card-title">A journalist who ate the evidence</div>
+        <div class="card-desc">Teun van de Keuken discovered chocolate was produced with child labour, tried to prosecute himself for purchasing it, then started a brand to force the industry to change. "Crazy" is the point — it's also why consumers trust them.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Extension Logic</div>
+        <div class="card-title">Same standard. New crop.</div>
+        <div class="card-desc">The mission doesn't belong to chocolate — it belongs to unfair supply chains. Extending to corn nachos applies the same sourcing model to a new product category, new meal occasions, and new consumer behaviours without cannibalising the core.</div>
+      </div>
+    </div>
+    
+    <div class="cards-4">
+      <div class="card accent">
+        <div class="card-label">Founded</div>
+        <div class="card-val" style="font-size:24px;">2005</div>
+        <div class="card-desc">By journalist Teun van de Keuken, Amsterdam, NL</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Certification</div>
+        <div class="card-val" style="font-size:18px;line-height:1.2;">B Corp</div>
+        <div class="card-desc">Highest standards of social and environmental performance</div>
+      </div>
+      <div class="card accent">
+        <div class="card-label">Mission</div>
+        <div class="card-desc" style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);line-height:1.4;">"100% slave-free chocolate as the norm in the industry"</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Core Products</div>
+        <div class="card-desc">Milk 32% · Milk Caramel Sea Salt 32% · Extra Dark 70% · Dark Milk Pretzel Toffee 42%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. The Problem ── -->
+  <section class="section reveal" id="problem">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2 class="section-title">The Corn Farming Problem</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Chocolate giants suppress cocoa prices. The same dynamic plays out in corn. Volatile pricing, exploitative labour practices, and zero supply chain transparency — Tony's Corny names the problem instead of hiding it.</p>
+
+    <div class="problem-visual" style="margin-bottom:32px;">
+      <div class="prob-quote">"Chocolate giants keep cocoa prices low → farmer poverty → child labour. The kingpin of forced labour in West Africa is the chocolate industry. Corn follows the same script."</div>
+      <div class="prob-attr">Structural analysis · Cocoa supply chain model applied to corn</div>
+      <div class="prob-stats">
+        <div>
+          <div class="prob-stat-val">⅓</div>
+          <div class="prob-stat-label">Global corn in water-stress zones</div>
+        </div>
+        <div>
+          <div class="prob-stat-val">~40%</div>
+          <div class="prob-stat-label">Guatemalan agricultural labour is children</div>
+        </div>
+        <div>
+          <div class="prob-stat-val">0%</div>
+          <div class="prob-stat-label">Corn supply chains with full traceability</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-4">
+      <div class="card">
+        <div class="card-label">Issue 1</div>
+        <div class="card-title">Fair Pay</div>
+        <div class="card-desc">Corn farmers in Guatemala & Mexico paid volatile prices that don't cover production costs. No price floor. No long-term contracts.</div>
+      </div>
+      <div class="card accent">
+        <div class="card-label">Issue 2</div>
+        <div class="card-title">Child Labour</div>
+        <div class="card-desc">Children enter the workforce out of economic necessity — not by choice. Fair adult income removes the need, without policing farmers.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Issue 3</div>
+        <div class="card-title">Water Stress</div>
+        <div class="card-desc">~1/3 of global corn in high water-stress regions. Income volatility from drought creates exploitation risk for entire farming communities.</div>
+      </div>
+      <div class="card accent">
+        <div class="card-label">Issue 4</div>
+        <div class="card-title">No Transparency</div>
+        <div class="card-desc">Corn supply chains are opaque "grey" chains. No brand has applied full farm-to-bag traceability to a snack product.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. Product ── -->
+  <section class="section reveal" id="product">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2 class="section-title">Product Differentiation</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Tony's Corny is a double-thick, stone-ground nacho chip. The product choice is deliberate — structural durability signals ingredient integrity, and "dip-proof" is a functional metaphor for standing up to the industry.</p>
+
+    <div class="big-statement" style="margin-bottom:40px;">
+      <div class="big-statement-text">"A double thick, stone ground nacho that delivers an intense toasted corn crunch — built to handle the heaviest dips and the hardest truths."</div>
+      <div class="big-statement-attr">Tony's Corny Product Positioning</div>
+    </div>
+
+    <table class="diff-table">
+      <thead>
+        <tr><th>Attribute</th><th>Tony's Corny</th><th>Doritos</th><th>Old El Paso</th><th>House Brands</th></tr>
+      </thead>
+      <tbody>
+        <tr class="tony-row">
+          <td>Durability</td>
+          <td><span class="badge tony-b">Double-Thick · Dip-Proof</span></td>
+          <td><span class="badge red">Fragile in bag</span></td>
+          <td><span class="badge red">Standard</span></td>
+          <td><span class="badge red">Variable</span></td>
+        </tr>
+        <tr>
+          <td>Ingredients</td>
+          <td><span class="badge tony-b">3 clean ingredients</span></td>
+          <td><span class="badge red">MSG + additives</span></td>
+          <td><span class="badge red">Long list</span></td>
+          <td><span class="badge red">Unverified</span></td>
+        </tr>
+        <tr class="tony-row">
+          <td>Supply Chain</td>
+          <td><span class="badge tony-b">100% Traceable</span></td>
+          <td><span class="badge red">Opaque "grey"</span></td>
+          <td><span class="badge red">Opaque "grey"</span></td>
+          <td><span class="badge red">Unknown</span></td>
+        </tr>
+        <tr>
+          <td>Mission</td>
+          <td><span class="badge tony-b">Fair Pay + Labour rights</span></td>
+          <td><span class="badge red">None</span></td>
+          <td><span class="badge red">None</span></td>
+          <td><span class="badge red">None</span></td>
+        </tr>
+        <tr class="tony-row">
+          <td>Brand Vibe</td>
+          <td><span class="badge tony-b">Social mission · Approachable</span></td>
+          <td>Just another snack</td>
+          <td>Just another snack</td>
+          <td>Commodity</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── 4. Packaging CAD ── -->
+  <section class="section reveal" id="packaging">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2 class="section-title">Dual-CTA Packaging Design</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">The packaging is a behavioural science device. Two physical openings, two distinct CTAs — one permits solo consumption without guilt, the other creates an automatic social sharing trigger. The ethical cycle starts with the tear.</p>
+
+    <div class="packaging-section">
+      <div class="packaging-header">
+        <div>
+          <div class="packaging-tag">Packaging Design Logic</div>
+          <div class="packaging-title">Two Opens. Two Behaviours. One Ethical Cycle.</div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);text-align:right;">Behavioural science applied<br>to packaging architecture</div>
+      </div>
+      <div class="packaging-body">
+        <!-- Left panel: CAD diagram -->
+        <div class="pkg-panel">
+          <div style="text-align:center;margin-bottom:24px;">
+            <div class="cad-diagram">
+              <div class="cad-top-flap">
+                <span class="cad-label">↑ PULL TO SNACK SOLO!</span>
+              </div>
+              <div class="cad-side-flap">
+                <span class="cad-label rotated">← PULL TO MAKE #FRIENDS</span>
+              </div>
+              <div class="cad-body-content">
+                <div class="cad-brand">TONY'S</div>
+                <div class="cad-product">CORNY</div>
+                <div style="margin-top:8px;">
+                  <span class="cad-annotation">DOUBLE THICK</span>
+                </div>
+                <div style="font-size:24px;margin-top:8px;">🌽</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase;">Stone Ground</div>
+              </div>
+            </div>
+            <div style="font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;text-align:center;">Structural Concept — Dual CTA Opening</div>
+          </div>
+        </div>
+        <!-- Right panel: Logic -->
+        <div class="pkg-panel">
+          <div style="margin-bottom:28px;">
+            <div class="pkg-cta-badge solo">↑ PULL TO SNACK SOLO! <span class="pkg-cta-arrow">← Top opening</span></div>
+            <div class="pkg-logic-item"><span class="pkg-logic-icon">🧠</span>Solo consumption permission — removes guilt about eating alone</div>
+            <div class="pkg-logic-item"><span class="pkg-logic-icon">🎯</span>Action-oriented language creates immediate tactile engagement</div>
+            <div class="pkg-logic-item"><span class="pkg-logic-icon">📱</span>Designed for sofa-content-consumption moments — solo snacking reframed as intentional</div>
+          </div>
+          <div style="margin-bottom:28px;">
+            <div class="pkg-cta-badge share">← PULL TO MAKE #FRIENDS <span class="pkg-cta-arrow">← Side opening</span></div>
+            <div class="pkg-logic-item"><span class="pkg-logic-icon">🧠</span>Social sharing cue — the physical gesture of opening becomes generosity</div>
+            <div class="pkg-logic-item"><span class="pkg-logic-icon">📣</span>UGC trigger — #FRIENDS hashtag lives on the bag, creating organic social content</div>
+            <div class="pkg-logic-item"><span class="pkg-logic-icon">♻️</span>"SHARING IS CARING" tagline links product to mission: fair pay → you share → ethical cycle</div>
+          </div>
+          <div style="background:var(--tony-light);border:1px solid rgba(196,26,14,0.15);border-radius:4px;padding:16px;">
+            <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--tony);margin-bottom:8px;">The Ethical Cycle on-pack</div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.7;">We share fair pay with farmers → You share with friends → Ethical cycle continues. The packaging makes the mission legible and participatory in one physical action.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. 4 Pillars ── -->
+  <section class="section reveal" id="pillars">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2 class="section-title">Tony's 4-Pillar Model Applied</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Tony's Chocolonely's existing sourcing methodology applied to corn farming in Guatemala and Mexico. Each pillar pairs a documented problem with a concrete, verifiable solution — no greenwashing.</p>
+
+    <div class="pillars-grid">
+      <div class="pillar-card" data-num="1">
+        <div class="pillar-header">
+          <span class="pillar-icon">💰</span>
+          <div class="pillar-title">Fair Price</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-problem">Problem</div>
+          <div class="pillar-problem-text">Volatile market prices don't cover production costs. No contracts, no floor.</div>
+          <div class="pillar-solution-label">Solution</div>
+          <div class="pillar-solution-text">Direct sourcing from cooperatives. Cost of production + living income + Fair Share premium. Long-term contracts with price floor.</div>
+        </div>
+      </div>
+      <div class="pillar-card" data-num="2">
+        <div class="pillar-header">
+          <span class="pillar-icon">👧</span>
+          <div class="pillar-title">Child Labour</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-problem">Problem</div>
+          <div class="pillar-problem-text">Children work fields out of economic necessity — ~40% of agricultural labour in Guatemala.</div>
+          <div class="pillar-solution-label">Solution</div>
+          <div class="pillar-solution-text">Remove the economic need, not police the farmers. Fair income enables adult labour. NGO verification + school support programs.</div>
+        </div>
+      </div>
+      <div class="pillar-card" data-num="3">
+        <div class="pillar-header">
+          <span class="pillar-icon">💧</span>
+          <div class="pillar-title">Water Resilience</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-problem">Problem</div>
+          <div class="pillar-problem-text">1/3 of global corn in high water-stress regions — income volatility creates exploitation risk.</div>
+          <div class="pillar-solution-label">Solution</div>
+          <div class="pillar-solution-text">Rainwater harvesting infrastructure, soil moisture training, drought-resistant seed varieties provided to partner cooperatives.</div>
+        </div>
+      </div>
+      <div class="pillar-card" data-num="4">
+        <div class="pillar-header">
+          <span class="pillar-icon">🔍</span>
+          <div class="pillar-title">Full Transparency</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-problem">Problem</div>
+          <div class="pillar-problem-text">Corn supply chains have zero traceability. No brand has applied full farm-to-bag visibility to snacks.</div>
+          <div class="pillar-solution-label">Solution</div>
+          <div class="pillar-solution-text">QR code on every bag shows the specific cooperatives, real-time impact metrics, and progress toward mission goals.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. Audience Segments ── -->
+  <section class="section reveal" id="audience">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <h2 class="section-title">Target Segments</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Three distinct consumer segments, each with a different entry point into the product. Tony's Corny can satisfy all three simultaneously because the product offers functional, social, and mission-led value in one bag.</p>
+
+    <div class="segment-grid">
+      <div class="segment-card">
+        <div class="seg-header" style="background:var(--tony-light);">
+          <div class="seg-num">Segment 01</div>
+          <div class="seg-name">Ethical Switchers</div>
+          <div class="seg-tagline">"Better crunch. No guilt."</div>
+        </div>
+        <div class="seg-body">
+          <div class="seg-item">Already thinking about ethical consumption</div>
+          <div class="seg-item">Willing to pay slight premium for mission-led products</div>
+          <div class="seg-item">Value clean ingredient list as much as the mission</div>
+          <div class="seg-item">Double-thick texture as a genuine product upgrade</div>
+          <div class="seg-competitor">Primary competitor: <strong>Doritos · Old El Paso</strong></div>
+        </div>
+      </div>
+      <div class="segment-card">
+        <div class="seg-header">
+          <div class="seg-num">Segment 02</div>
+          <div class="seg-name">Social Centrics</div>
+          <div class="seg-tagline">"Snacks for the squad."</div>
+        </div>
+        <div class="seg-body">
+          <div class="seg-item">Snacking as social ritual — movie nights, house parties</div>
+          <div class="seg-item">Pull-to-share opening directly designed for this behaviour</div>
+          <div class="seg-item">#FRIENDS hashtag and UGC challenge creates shareability</div>
+          <div class="seg-item">Mission becomes a talking point, not a lecture</div>
+          <div class="seg-competitor">Primary competitor: <strong>Carrefour house brands</strong></div>
+        </div>
+      </div>
+      <div class="segment-card">
+        <div class="seg-header" style="background:var(--tony-light);">
+          <div class="seg-num">Segment 03</div>
+          <div class="seg-name">Tony's Loyalists</div>
+          <div class="seg-tagline">"Support the mission, new format."</div>
+        </div>
+        <div class="seg-body">
+          <div class="seg-item">Existing Tony's Chocolonely purchasers</div>
+          <div class="seg-item">Trust the brand's integrity — no persuasion needed</div>
+          <div class="seg-item">Corny expands their mission support into a new category</div>
+          <div class="seg-item">No cannibalization — chocolate = individual, nachos = social</div>
+          <div class="seg-competitor">Primary activation: <strong>Cross-sell from existing base</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. AIDA Funnel ── -->
+  <section class="section reveal" id="funnel">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <h2 class="section-title">AIDA Social Media Funnel</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">A full social funnel from brand introduction to retail conversion — tied to a "No More Lonely" campaign narrative. Mission education and social proof flow directly into in-store and QR activation.</p>
+
+    <div class="funnel">
+      <div class="funnel-row">
+        <div class="funnel-letter" style="color:rgba(196,26,14,0.12);">A</div>
+        <div>
+          <div class="funnel-stage-label">Awareness</div>
+          <div class="funnel-stage-name">No More Lonely</div>
+        </div>
+        <div class="funnel-content">Mission reveal posts, product launch announcement, "No More Lonely" campaign — bag alongside chocolate bar. Cross-sell creative showing existing Tony's fans the new format.</div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">Instagram · TikTok</div>
+          </div>
+          <div class="funnel-kpi-label" style="margin-top:8px;">KPIs</div>
+          <div class="funnel-kpi">Reach · Follows</div>
+        </div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-letter" style="color:rgba(196,26,14,0.10);">I</div>
+        <div>
+          <div class="funnel-stage-label">Interest</div>
+          <div class="funnel-stage-name">Issue Education</div>
+        </div>
+        <div class="funnel-content">Illustrated issue series: Fair Pay (hand + corn + coins), Child Labour (girl in corn field), Water Stress (crying corn character). Designed to inform, not lecture — visual storytelling with emotional resonance.</div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">Instagram · LinkedIn</div>
+          </div>
+          <div class="funnel-kpi-label" style="margin-top:8px;">KPIs</div>
+          <div class="funnel-kpi">Engagement rate<br>Saves · Shares</div>
+        </div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-letter" style="color:rgba(196,26,14,0.08);">D</div>
+        <div>
+          <div class="funnel-stage-label">Desire</div>
+          <div class="funnel-stage-name">UGC Challenges</div>
+        </div>
+        <div class="funnel-content">"Pull to Make #Friends" UGC challenge — share your bag-opening moment. Party night content, outdoor table lifestyle shots. Social proof from real consumers sharing the experience.</div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">TikTok · Instagram</div>
+          </div>
+          <div class="funnel-kpi-label" style="margin-top:8px;">KPIs</div>
+          <div class="funnel-kpi">UGC volume<br>#FRIENDS posts</div>
+        </div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-letter" style="color:rgba(196,26,14,0.06);">A</div>
+        <div>
+          <div class="funnel-stage-label">Action</div>
+          <div class="funnel-stage-name">Retail + QR</div>
+        </div>
+        <div class="funnel-content">QR scan-to-impact on pack (shows exact farmer cooperative, real metrics). Retail launch events. In-store activation and cross-shelf placement with chocolate. Mission closes the loop.</div>
+        <div>
+          <div class="funnel-channels">
+            <div class="funnel-ch-tag">All + In-store</div>
+          </div>
+          <div class="funnel-kpi-label" style="margin-top:8px;">KPIs</div>
+          <div class="funnel-kpi">Trial rate<br>QR scans</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. Campaigns ── -->
+  <section class="section reveal" id="campaigns">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <h2 class="section-title">Creative Campaigns</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="section-sub">Four social campaigns, each addressing a different mission touchpoint. Illustrated and lifestyle formats — designed to educate without moralising, and always with Tony's signature bold aesthetic.</p>
+
+    <div class="campaign-grid">
+      <div class="campaign-card">
+        <div class="campaign-visual post-ig post-no-more">
+          <div class="post-no-more-text">NO<br>MORE<br>LONELY</div>
+          <div class="post-items-row" style="margin-top:16px;">
+            <div class="post-choc">🍫</div>
+            <div class="post-plus">+</div>
+            <div class="post-bag"><div class="post-bag-txt">TONY'S<br>CORNY</div></div>
+          </div>
+          <div class="post-no-more-sub" style="margin-top:12px;">Two missions. One brand.</div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-type">Launch Campaign · Instagram</div>
+          <div class="campaign-name">"No More Lonely"</div>
+          <div class="campaign-desc">Product reveal post showing chocolate bar alongside the new Corny bag — announcing the mission expansion. Blue background, bold typography. Cross-sells to existing Tony's loyalists and introduces Corny to new audience.</div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="campaign-visual post-ig post-fairpay">
+          <div class="post-hand">🌽</div>
+          <div class="post-fp-tag">FAIR PAY</div>
+          <div style="text-align:center;">
+            <div class="post-fp-sub">Direct from cooperative</div>
+            <div style="font-size:9px;color:#bf360c;margin-top:4px;">Living income · Price floor · Long contracts</div>
+          </div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-type">Issue Education · Instagram / LinkedIn</div>
+          <div class="campaign-name">Fair Pay Series</div>
+          <div class="campaign-desc">Illustrated post showing hand holding corn with coins — visualising the fair price promise. Part of a three-post issue education series covering Fair Pay, Child Labour, and Water Stress. Factual, not preachy.</div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="campaign-visual post-ig post-water">
+          <div class="post-corn-cry">🌽</div>
+          <div class="post-w-tag">WATER STRESS</div>
+          <div style="text-align:center;">
+            <div class="post-w-sub">⅓ of corn in drought zones</div>
+            <div style="font-size:9px;color:#0d47a1;margin-top:4px;">Rainwater · Soil training · Drought seeds</div>
+          </div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-type">Issue Education · Instagram</div>
+          <div class="campaign-name">Water Stress Awareness</div>
+          <div class="campaign-desc">Illustrated crying corn character on cracked earth — Tony's signature "wonky" visual language applied to the water stress issue. Approachable aesthetic around a serious problem. Paired with concrete solution messaging.</div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="campaign-visual post-ig post-friends">
+          <div class="post-friends-icons">👥</div>
+          <div class="post-friends-tag">Pull to Make<br>#FRIENDS</div>
+          <div class="post-friends-sub">The side opening. The sharing move.</div>
+        </div>
+        <div class="campaign-body">
+          <div class="campaign-type">UGC Challenge · TikTok / Instagram</div>
+          <div class="campaign-name">#FRIENDS Challenge</div>
+          <div class="campaign-desc">Social challenge around the bag's side-opening CTA — pull the bag open and share with friends. Designed for party nights and outdoor social moments. UGC engine creating organic reach. Ethical cycle messaging embedded naturally.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <div class="cycle-visual">
+        <div class="cycle-node">
+          <div class="cycle-icon">🌽</div>
+          <div class="cycle-name">Fair Farm</div>
+          <div class="cycle-desc">We pay fair prices. Farmers thrive. No child labour.</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-node">
+          <div class="cycle-icon">🏭</div>
+          <div class="cycle-name">Transparent Chain</div>
+          <div class="cycle-desc">QR on every bag. Traceable from field to shelf.</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-node">
+          <div class="cycle-icon">🛒</div>
+          <div class="cycle-name">You Buy</div>
+          <div class="cycle-desc">Your purchase funds the model. Mission scales.</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-node">
+          <div class="cycle-icon">🤝</div>
+          <div class="cycle-name">You Share</div>
+          <div class="cycle-desc">Pull the side. Make friends. Ethical cycle continues.</div>
+        </div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-node" style="opacity:0.6;">
+          <div class="cycle-icon">🌽</div>
+          <div class="cycle-name">Back to Farm</div>
+          <div class="cycle-desc">More purchases → more impact → new cooperatives added.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-nav">
+    <a href="beealp.html">← BeeAlp</a>
+    <a href="index.html">All Work →</a>
+  </div>
+  Ankit Raj · Marketing Portfolio · 2026
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(r => obs.observe(r));
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.index-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+});
+</script>
+</body>
+</html>
