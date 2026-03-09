@@ -63,48 +63,23 @@ header {
 .meta-key { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 
 /* Hero Bag Visual */
-.hero-visual { display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; animation: fadeUp 0.8s 0.2s ease both; }
-.bag-scene { position: relative; width: 300px; height: 380px; }
-.bag-main {
-  width: 200px; height: 300px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  background: linear-gradient(170deg, #e82010, #b5130a 60%, #8b0d08);
-  border-radius: 12px 12px 20px 20px;
-  box-shadow: 0 30px 80px rgba(196,26,14,0.3), 0 8px 24px rgba(0,0,0,0.15);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  overflow: hidden; position: absolute;
-}
-.bag-main::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 48px;
-  background: rgba(0,0,0,0.2); clip-path: ellipse(55% 100% at 50% 0%);
-}
-.bag-label { text-align: center; position: relative; z-index: 1; }
-.bag-tony { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: white; letter-spacing: 0.05em; opacity: 0.85; }
-.bag-apostrophe { font-family: 'Playfair Display', serif; font-size: 10px; color: rgba(255,255,255,0.7); }
-.bag-name { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; line-height: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.bag-sub { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 6px; }
-.bag-cta-top {
-  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
-  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-  color: white; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 4px 10px; border-radius: 2px; white-space: nowrap; z-index: 2;
-}
-.bag-cta-side {
-  position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.4);
-  color: white; font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 4px 8px; border-radius: 2px; white-space: nowrap; z-index: 2;
-  writing-mode: vertical-rl; text-orientation: mixed;
-}
-.bag-badge-fair { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 8px; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; white-space: nowrap; z-index: 2; }
-.float-tag {
-  position: absolute; background: white; border: 1px solid var(--border);
-  border-radius: 3px; padding: 8px 12px; font-size: 9px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-.float-tag-1 { top: 20px; left: 0; }
-.float-tag-2 { bottom: 40px; right: 0; }
-.ft-val { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--tony); }
-.ft-label { font-size: 8px; color: var(--muted); letter-spacing: 0.06em; }
+<div class="hero-visual">
+    <div class="bag-scene" style="width: 100%; max-width: 400px; position: relative; margin: 0 auto;">
+      
+      <img src="images/tony-hero.jpg" alt="Tony's Corny Bag" style="width: 100%; height: auto; display: block; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));">
+      
+      <div class="float-tag float-tag-1" style="position: absolute; top: 10%; left: -20px; background: white; padding: 8px 12px; border: 1px solid #e2ddd6; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div class="ft-val" style="font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: #c41a0e;">100%</div>
+        <div class="ft-label" style="font-size: 8px; color: #6b6b6b; text-transform: uppercase;">Traceable Supply</div>
+      </div>
+      
+      <div class="float-tag float-tag-2" style="position: absolute; bottom: 20%; right: -20px; background: white; padding: 8px 12px; border: 1px solid #e2ddd6; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div class="ft-val" style="font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: #c41a0e;">3</div>
+        <div class="ft-label" style="font-size: 8px; color: #6b6b6b; text-transform: uppercase;">Clean Ingredients</div>
+      </div>
+
+    </div>
+  </div>
 
 /* ── Index Nav ── */
 .index-nav {
