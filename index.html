@@ -3,1284 +3,465 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketing Portfolio — Ankit Raj</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400;1,9..144,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<title>Ankit Raj — Marketing Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════ RESET & TOKENS ══════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:'DM Mono',monospace;
-  background:#050C14;color:#B8CCD8;
-  overflow-x:hidden;min-height:100vh;
-  cursor:default;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --ink: #0f0f0f;
+    --muted: #6b6b6b;
+    --light: #f5f3ef;
+    --bee: #0098a8;
+    --bee-light: #e0f7fa;
+    --tony: #c41a0e;
+    --tony-light: #fff0ee;
+    --white: #ffffff;
+    --border: #e2ddd6;
+  }
 
-:root{
-  /* Core palette */
-  --ink:#050C14;
-  --ink2:#091524;
-  --ink3:#0D1F30;
-  --mist:#B8CCD8;
-  --mist2:#6A8898;
-  --mist3:#3A5468;
-  --white:#F0F6FA;
-  --border:rgba(255,255,255,0.06);
-  --border2:rgba(255,255,255,0.1);
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--light);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: default;
+  }
 
-  /* BeeAlp accent */
-  --bee:#00C2E0;
-  --bee2:#5EEEFF;
-  --bee3:rgba(0,194,224,0.12);
-  --gold:#F0C040;
+  /* ── Header ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,243,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
 
-  /* Tony's accent */
-  --tony:#E8170A;
-  --tony2:#FF4D43;
-  --tony3:rgba(232,23,10,0.12);
-  --corn:#F5C842;
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0,152,168,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 50%, rgba(196,26,14,0.04) 0%, transparent 60%);
+  }
+  .hero-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-label::before, .hero-label::after {
+    content: ''; width: 32px; height: 1px; background: var(--border);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-align: center;
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .hero-sub {
+    font-size: 12px; color: var(--muted);
+    text-align: center; line-height: 1.8;
+    max-width: 480px; margin: 24px auto 0;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin-top: 28px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-tag {
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(255,255,255,0.6);
+  }
 
-  /* Typography */
-  --serif:'Fraunces',serif;
-  --mono:'DM Mono',monospace;
+  /* ── Scroll hint ── */
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+  .scroll-hint span { display: block; width: 1px; height: 40px; background: linear-gradient(var(--muted), transparent); }
 
-  /* Nav */
-  --nav-h:56px;
-}
+  /* ── Case Study Grid ── */
+  .work-section {
+    padding: 60px 40px 120px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:2px}
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
 
-/* ══════════════════════ NAV ══════════════════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;
-  height:var(--nav-h);z-index:300;
-  background:rgba(5,12,20,0.92);
-  backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  justify-content:space-between;
-  padding:0 28px;gap:16px;
-}
-.nav-logo{
-  display:flex;align-items:center;gap:10px;
-  cursor:pointer;
-  font-family:var(--serif);
-  font-size:15px;font-weight:700;font-style:italic;
-  color:var(--white);
-  letter-spacing:-.02em;
-  transition:opacity .2s;
-}
-.nav-logo:hover{opacity:.75}
-.nav-logo-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--bee);
-  box-shadow:0 0 8px var(--bee);
-  flex-shrink:0;
-}
-.nav-crumb{
-  font-family:var(--mono);font-size:10px;
-  color:var(--mist3);letter-spacing:.06em;
-  text-transform:uppercase;
-  transition:opacity .3s;
-}
-.nav-crumb.hidden{opacity:0;pointer-events:none}
+  /* ── Project Card ── */
+  .pcard {
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s;
+  }
+  .pcard:hover { transform: translateY(-6px); }
+  
+  .pcard-visual {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  /* BeeAlp card visual */
+  .bee-visual {
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 40%, #e8f5e9 100%);
+  }
+  .bee-visual-inner {
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+  .bee-phone-mock {
+    width: 100px; height: 180px;
+    background: linear-gradient(135deg, #1a2a35, #0d1f30);
+    border-radius: 16px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,152,168,0.25), 0 4px 20px rgba(0,0,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .bee-phone-mock::before {
+    content: '';
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 24px; height: 3px; background: #0d2535; border-radius: 2px;
+  }
+  .bee-phone-logo {
+    font-size: 28px; filter: drop-shadow(0 0 12px rgba(0,194,224,0.4));
+  }
+  .bee-float-tag {
+    position: absolute; top: -20px; right: -30px;
+    background: rgba(0,152,168,0.9);
+    color: white; font-size: 8px; letter-spacing: 0.1em;
+    padding: 6px 10px; border-radius: 2px;
+    white-space: nowrap;
+  }
+  .bee-float-stat {
+    position: absolute; bottom: -15px; left: -20px;
+    background: white;
+    color: var(--ink); font-size: 9px;
+    padding: 8px 12px; border-radius: 2px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  .bee-float-stat span {
+    display: block; font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400; font-size: 7px; color: var(--muted); letter-spacing: 0.05em;
+  }
 
-.nav-center{
-  display:flex;align-items:center;gap:4px;
-  flex:1;justify-content:center;
-}
-.nav-tab{
-  background:none;border:none;
-  font-family:var(--mono);font-size:10px;font-weight:500;
-  color:var(--mist3);letter-spacing:.06em;text-transform:uppercase;
-  padding:5px 12px;border-radius:5px;cursor:pointer;
-  transition:all .2s;
-}
-.nav-tab:hover{color:var(--mist);background:rgba(255,255,255,0.04)}
-.nav-tab.active{color:var(--bee2);background:var(--bee3)}
-.nav-tab.active.tony{color:var(--tony2);background:var(--tony3)}
+  /* Tony's card visual */
+  .tony-visual {
+    background: linear-gradient(135deg, #fff8f5 0%, #fde8e0 40%, #fff9f0 100%);
+  }
+  .tony-bag-mock {
+    width: 90px; height: 140px;
+    background: linear-gradient(170deg, #e8170a, #b5130a);
+    border-radius: 8px 8px 14px 14px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(196,26,14,0.2), 0 4px 20px rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .tony-bag-mock::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 30px;
+    background: rgba(0,0,0,0.15);
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+  .tony-bag-text {
+    text-align: center; line-height: 1;
+    position: relative; z-index: 1;
+  }
+  .tony-bag-text .t1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700; color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .tony-bag-text .t2 {
+    font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.9);
+    letter-spacing: 0.05em; margin-top: 2px;
+  }
+  .tony-float-tag {
+    position: absolute; top: -15px; left: -25px;
+    background: rgba(196,26,14,0.9);
+    color: white; font-size: 8px; letter-spacing: 0.1em;
+    padding: 6px 10px; border-radius: 2px;
+    white-space: nowrap;
+  }
+  .tony-float-stat {
+    position: absolute; bottom: -15px; right: -20px;
+    background: white;
+    color: var(--ink); font-size: 9px;
+    padding: 8px 12px; border-radius: 2px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  .tony-float-stat span {
+    display: block; font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400; font-size: 7px; color: var(--muted); letter-spacing: 0.05em;
+  }
 
-.nav-right{display:flex;align-items:center;gap:10px}
-.progress-wrap{
-  width:72px;height:3px;
-  background:rgba(255,255,255,0.06);
-  border-radius:2px;overflow:hidden;
-}
-.progress-bar{
-  height:100%;
-  background:linear-gradient(90deg,var(--bee),var(--bee2));
-  border-radius:2px;
-  transition:width .5s cubic-bezier(.4,0,.2,1);
-}
-.progress-bar.tony{background:linear-gradient(90deg,var(--tony),var(--tony2))}
+  .pcard-body {
+    padding: 24px 28px;
+    background: white;
+    border: 1px solid var(--border);
+    border-top: none;
+  }
+  .pcard-type {
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pcard-type.bee { color: var(--bee); }
+  .pcard-type.tony { color: var(--tony); }
+  .pcard-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1;
+    margin-bottom: 10px;
+  }
+  .pcard-desc { font-size: 11px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .pcard-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pill {
+    font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 2px;
+    border: 1px solid;
+  }
+  .pill.bee { border-color: rgba(0,152,168,0.25); color: var(--bee); background: var(--bee-light); }
+  .pill.tony { border-color: rgba(196,26,14,0.2); color: var(--tony); background: var(--tony-light); }
+  .pcard-arrow {
+    margin-top: 18px;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    transition: gap 0.2s;
+  }
+  .pcard-arrow.bee { color: var(--bee); }
+  .pcard-arrow.tony { color: var(--tony); }
+  .pcard:hover .pcard-arrow { gap: 14px; }
 
-/* ══════════════════════ VIEWS ══════════════════════ */
-.view{display:none;min-height:100vh;padding-top:var(--nav-h)}
-.view.active{display:block;animation:viewIn .5s cubic-bezier(.4,0,.2,1)}
-@keyframes viewIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  /* ── About strip ── */
+  .about-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px;
+    display: flex; align-items: center;
+    gap: 80px;
+    max-width: 1200px; margin: 0 auto 80px;
+  }
+  .about-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    white-space: nowrap;
+  }
+  .about-roles {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    flex: 1;
+  }
+  .role-badge {
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 12px; border: 1px solid var(--border);
+    border-radius: 2px; color: var(--muted);
+    background: rgba(255,255,255,0.5);
+  }
+  .about-contact {
+    font-size: 10px; color: var(--muted);
+    white-space: nowrap;
+  }
 
-/* ══════════════════════ HOME GALLERY ══════════════════════ */
-#home{
-  position:relative;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;
-  min-height:100vh;
-  padding:0 24px 80px;
-}
-.home-bg{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 60% 40% at 15% 60%, rgba(0,194,224,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 85% 40%, rgba(232,23,10,0.04) 0%, transparent 60%);
-  pointer-events:none;
-}
-.home-grid-bg{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size:48px 48px;
-  pointer-events:none;
-}
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-.home-header{
-  position:relative;z-index:1;
-  text-align:center;
-  margin-bottom:64px;
-  padding-top:48px;
-}
-.home-eyebrow{
-  font-size:10px;font-weight:500;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--mist3);
-  margin-bottom:16px;display:flex;align-items:center;
-  justify-content:center;gap:10px;
-}
-.home-eyebrow::before,.home-eyebrow::after{
-  content:'';width:24px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--mist3));
-}
-.home-eyebrow::after{
-  background:linear-gradient(90deg,var(--mist3),transparent);
-}
-.home-title{
-  font-family:var(--serif);
-  font-size:clamp(36px,7vw,72px);
-  font-weight:700;font-style:italic;
-  color:var(--white);
-  line-height:.9;letter-spacing:-.04em;
-  margin-bottom:16px;
-}
-.home-title span{
-  font-style:normal;font-weight:300;
-  font-size:.55em;
-  display:block;color:var(--mist2);
-  letter-spacing:.01em;
-  margin-bottom:4px;
-}
-.home-sub{
-  font-size:12px;color:var(--mist3);
-  letter-spacing:.05em;line-height:1.7;
-  max-width:400px;margin:0 auto;
-}
+  /* ── Footer ── */
+  footer {
+    text-align: center; padding: 40px;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--border);
+  }
 
-/* ── Gallery Cards ── */
-.gallery{
-  position:relative;z-index:1;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  max-width:880px;width:100%;
-}
-.gcard{
-  position:relative;
-  background:var(--ink2);
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-  aspect-ratio:3/4;
-  max-height:440px;
-  display:flex;flex-direction:column;
-}
-.gcard:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,255,255,0.12);
-  box-shadow:0 40px 80px rgba(0,0,0,.5);
-}
-.gcard.bee-card:hover{border-color:rgba(0,194,224,0.25);box-shadow:0 40px 80px rgba(0,194,224,0.08),0 0 0 1px rgba(0,194,224,0.12)}
-.gcard.tony-card:hover{border-color:rgba(232,23,10,0.25);box-shadow:0 40px 80px rgba(232,23,10,0.06),0 0 0 1px rgba(232,23,10,0.12)}
-
-.gcard-visual{
-  flex:1;position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-}
-.gcard-bg-bee{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80% 70% at 50% 30%, rgba(0,194,224,0.12) 0%, transparent 70%),
-    linear-gradient(180deg,#091524,#050C14);
-}
-.gcard-bg-tony{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80% 70% at 50% 30%, rgba(232,23,10,0.15) 0%, transparent 70%),
-    linear-gradient(180deg,#140508,#050C14);
-}
-.gcard-hex{
-  position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='44'%3E%3Cpolygon points='25,2 47,13 47,31 25,42 3,31 3,13' fill='none' stroke='rgba(0,194,224,0.06)' stroke-width='1'/%3E%3C/svg%3E");
-  background-size:50px 44px;opacity:.6;
-}
-.gcard-choc{
-  position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect x='1' y='1' width='38' height='38' rx='4' fill='none' stroke='rgba(232,23,10,0.06)' stroke-width='1'/%3E%3C/svg%3E");
-  background-size:40px 40px;
-}
-
-.gcard-icon{
-  position:relative;z-index:1;
-  font-size:80px;
-  filter:drop-shadow(0 0 40px rgba(0,194,224,0.2));
-  transition:transform .4s cubic-bezier(.4,0,.2,1);
-}
-.gcard:hover .gcard-icon{transform:scale(1.08) rotate(-3deg)}
-.gcard-icon.tony-ico{
-  filter:drop-shadow(0 0 40px rgba(232,23,10,0.2));
-}
-
-.gcard-footer{
-  padding:20px 22px;
-  border-top:1px solid var(--border);
-  background:rgba(5,12,20,0.6);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.gcard-meta{}
-.gcard-tag{
-  font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  font-weight:500;margin-bottom:5px;
-}
-.gcard-tag.bee{color:var(--bee)}
-.gcard-tag.tony{color:var(--tony2)}
-.gcard-name{
-  font-family:var(--serif);
-  font-size:20px;font-weight:700;font-style:italic;
-  color:var(--white);letter-spacing:-.02em;
-  line-height:1;
-}
-.gcard-chips{
-  display:flex;flex-direction:column;align-items:flex-end;gap:4px;
-}
-.gcard-chip{
-  font-size:9px;letter-spacing:.06em;
-  padding:3px 9px;border-radius:4px;
-  font-weight:500;text-transform:uppercase;
-}
-.gcard-chip.bee{background:var(--bee3);color:var(--bee2);border:1px solid rgba(0,194,224,0.2)}
-.gcard-chip.tony{background:var(--tony3);color:var(--tony2);border:1px solid rgba(232,23,10,0.2)}
-
-.gcard-arrow{
-  position:absolute;bottom:20px;right:22px;
-  font-size:20px;color:rgba(255,255,255,0.15);
-  transition:all .25s;
-}
-.gcard:hover .gcard-arrow{color:var(--bee);transform:translateX(4px)}
-.tony-card:hover .gcard-arrow{color:var(--tony2)}
-
-/* ══════════════════════ SHARED INNER LAYOUT ══════════════════════ */
-.inner{max-width:860px;margin:0 auto;padding:44px 24px 120px}
-
-/* ── Page Header ── */
-.pg-header{margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--border)}
-.pg-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  margin-bottom:14px;
-}
-.pg-badge{
-  width:26px;height:26px;border-radius:7px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;
-  font-family:var(--serif);font-style:italic;
-}
-.pg-badge.bee{background:linear-gradient(135deg,var(--bee),var(--bee2));color:var(--ink);box-shadow:0 0 14px rgba(0,194,224,0.35)}
-.pg-badge.tony{background:linear-gradient(135deg,var(--tony),var(--tony2));color:var(--white);box-shadow:0 0 14px rgba(232,23,10,0.35)}
-.pg-eyebrow-txt{
-  font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
-}
-.pg-eyebrow-txt.bee{color:var(--bee)}
-.pg-eyebrow-txt.tony{color:var(--tony2)}
-.pg-title{
-  font-family:var(--serif);
-  font-size:clamp(26px,4.5vw,44px);
-  font-weight:700;color:var(--white);
-  line-height:1.05;letter-spacing:-.03em;
-  margin-bottom:10px;
-}
-.pg-title em.bee{color:var(--bee);font-style:italic}
-.pg-title em.tony{color:var(--tony2);font-style:italic}
-.pg-sub{font-size:13px;color:var(--mist2);line-height:1.75;max-width:580px;font-weight:400}
-
-/* ── Section Label ── */
-.sec{
-  font-size:9px;font-weight:500;letter-spacing:.18em;
-  text-transform:uppercase;
-  margin-bottom:12px;
-  display:flex;align-items:center;gap:9px;
-}
-.sec.bee{color:var(--bee)}
-.sec.tony{color:var(--tony2)}
-.sec::before{content:'';width:14px;height:1.5px;flex-shrink:0;border-radius:1px}
-.sec.bee::before{background:linear-gradient(90deg,var(--bee),var(--bee2))}
-.sec.tony::before{background:linear-gradient(90deg,var(--tony),var(--tony2))}
-
-/* ── Cards ── */
-.card{
-  background:var(--ink2);border:1px solid var(--border);
-  border-radius:14px;padding:22px;
-  transition:border-color .2s;
-}
-.card:hover{border-color:var(--border2)}
-
-/* ── KPI Grid ── */
-.kpis{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:8px;margin:16px 0;
-}
-.kpi{
-  background:var(--ink2);border:1px solid var(--border);
-  border-radius:12px;padding:18px 14px;text-align:center;
-  position:relative;overflow:hidden;
-  transition:all .25s;
-}
-.kpi::after{
-  content:'';position:absolute;inset:0;opacity:0;
-  transition:opacity .3s;
-}
-.kpi.bee::after{background:radial-gradient(circle at 50% 0%, rgba(0,194,224,0.1),transparent 70%)}
-.kpi.tony::after{background:radial-gradient(circle at 50% 0%, rgba(232,23,10,0.08),transparent 70%)}
-.kpi:hover::after{opacity:1}
-.kpi:hover{transform:translateY(-2px);border-color:var(--border2)}
-.kpi-n{
-  font-family:var(--serif);
-  font-size:26px;font-weight:700;font-style:italic;
-  line-height:1;margin-bottom:5px;
-}
-.kpi-n.bee{color:var(--bee2)}
-.kpi-n.tony{color:var(--tony2)}
-.kpi-l{font-size:10px;color:var(--mist3);line-height:1.4;letter-spacing:.02em}
-
-/* ── Highlight Block ── */
-.hl{
-  border-radius:12px;padding:18px 22px;
-  margin:16px 0;position:relative;overflow:hidden;
-}
-.hl.bee{
-  background:linear-gradient(135deg,rgba(0,194,224,0.07),rgba(0,194,224,0.02));
-  border:1px solid rgba(0,194,224,0.18);
-}
-.hl.tony{
-  background:linear-gradient(135deg,rgba(232,23,10,0.07),rgba(232,23,10,0.02));
-  border:1px solid rgba(232,23,10,0.18);
-}
-.hl::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  width:2px;border-radius:2px 0 0 2px;
-}
-.hl.bee::before{background:linear-gradient(180deg,var(--bee),var(--bee2))}
-.hl.tony::before{background:linear-gradient(180deg,var(--tony),var(--tony2))}
-.hl p{font-size:13px;line-height:1.75;color:var(--mist);padding-left:4px}
-.hl strong{color:var(--white)}
-
-/* ── Two columns ── */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-
-/* ── Item rows ── */
-.items{display:flex;flex-direction:column;gap:7px;margin:12px 0}
-.item{
-  display:flex;align-items:flex-start;gap:13px;
-  background:var(--ink2);border:1px solid var(--border);
-  border-radius:11px;padding:14px 16px;
-  transition:all .2s;
-}
-.item:hover{border-color:var(--border2);background:var(--ink3)}
-.item-ico{
-  width:32px;height:32px;border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;flex-shrink:0;
-}
-.item-ico.bee{background:rgba(0,194,224,0.1)}
-.item-ico.tony{background:rgba(232,23,10,0.1)}
-.item-title{font-size:12px;font-weight:500;color:var(--white);margin-bottom:2px;letter-spacing:-.01em}
-.item-desc{font-size:11px;color:var(--mist3);line-height:1.55}
-
-/* ── Tags ── */
-.tags{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
-.tag{
-  padding:3px 10px;border-radius:4px;
-  font-size:10px;font-weight:500;
-  letter-spacing:.03em;
-}
-.tag.bee{background:rgba(0,194,224,0.08);border:1px solid rgba(0,194,224,0.2);color:var(--bee2)}
-.tag.tony{background:rgba(232,23,10,0.08);border:1px solid rgba(232,23,10,0.2);color:var(--tony2)}
-.tag.gold{background:rgba(240,192,64,0.08);border:1px solid rgba(240,192,64,0.2);color:var(--gold)}
-.tag.neutral{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:var(--mist)}
-
-/* ── Table ── */
-.tw{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin:14px 0}
-table{width:100%;border-collapse:collapse;min-width:400px}
-thead tr{background:rgba(255,255,255,0.03)}
-th{
-  font-size:9px;font-weight:500;letter-spacing:.12em;
-  text-transform:uppercase;padding:11px 14px;text-align:left;
-  border-bottom:1px solid var(--border);
-}
-th.bee{color:var(--bee)}
-th.tony{color:var(--tony2)}
-td{padding:10px 14px;font-size:11px;color:var(--mist2);border-bottom:1px solid rgba(255,255,255,.02);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-td.strong{font-weight:500;color:var(--white);font-size:12px}
-tr:hover td{background:rgba(255,255,255,.015)}
-.hl-row td{background:rgba(0,194,224,.04)}
-.hl-row-tony td{background:rgba(232,23,10,.03)}
-
-/* ── Divider ── */
-.dvd{height:1px;background:var(--border);margin:28px 0}
-.gap{margin-top:18px}
-
-/* ── Funnel ── */
-.funnel{display:flex;flex-direction:column;gap:4px;margin:12px 0}
-.fr{
-  border-radius:10px;padding:12px 16px;
-  display:grid;grid-template-columns:24px 1fr auto;
-  align-items:center;gap:11px;transition:transform .2s;
-}
-.fr:hover{transform:translateX(4px)}
-.fr.f1.bee{background:rgba(0,194,224,.18);border-left:3px solid var(--bee)}
-.fr.f2.bee{background:rgba(0,194,224,.12);border-left:3px solid rgba(0,194,224,.7)}
-.fr.f3.bee{background:rgba(0,194,224,.07);border-left:3px solid rgba(0,194,224,.5)}
-.fr.f4.bee{background:rgba(0,194,224,.03);border-left:3px solid rgba(0,194,224,.3)}
-.fr.f1.tony{background:rgba(232,23,10,.18);border-left:3px solid var(--tony)}
-.fr.f2.tony{background:rgba(232,23,10,.12);border-left:3px solid rgba(232,23,10,.7)}
-.fr.f3.tony{background:rgba(232,23,10,.07);border-left:3px solid rgba(232,23,10,.5)}
-.fr.f4.tony{background:rgba(232,23,10,.03);border-left:3px solid rgba(232,23,10,.3)}
-.fl{font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--white)}
-.fn{font-size:12px;font-weight:500;color:var(--white);margin-bottom:1px}
-.fd{font-size:10px;color:var(--mist3);letter-spacing:.02em}
-.fk{font-size:10px;text-align:right;white-space:nowrap}
-.fk.bee{color:var(--bee2)}
-.fk.tony{color:var(--tony2)}
-
-/* ── Timeline ── */
-.tl{display:flex;flex-direction:column;margin:14px 0;position:relative}
-.tl::before{
-  content:'';position:absolute;left:16px;top:8px;bottom:20px;
-  width:1.5px;background:linear-gradient(180deg,var(--bee),rgba(0,194,224,0.08));
-}
-.tl.tony::before{background:linear-gradient(180deg,var(--tony),rgba(232,23,10,0.08))}
-.tli{display:flex;gap:18px;padding-bottom:22px;position:relative}
-.tli:last-child{padding-bottom:0}
-.tld{
-  width:34px;height:34px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-size:10px;font-weight:700;font-style:italic;
-  position:relative;z-index:1;
-  box-shadow:0 0 0 4px var(--ink);
-}
-.tld.bee-full{background:linear-gradient(135deg,var(--bee),var(--bee2));color:var(--ink)}
-.tld.bee-mid{background:rgba(0,194,224,.5);color:var(--ink)}
-.tld.gold{background:var(--gold);color:var(--ink)}
-.tld.bee-dim{background:rgba(0,194,224,.2);color:var(--mist)}
-.tld.tony-full{background:linear-gradient(135deg,var(--tony),var(--tony2));color:var(--white)}
-.tld.tony-mid{background:rgba(232,23,10,.5);color:var(--white)}
-.tld.tony-dim{background:rgba(232,23,10,.2);color:var(--mist)}
-.tlb{flex:1;padding-top:6px}
-.tldt{font-size:9px;font-weight:500;letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase}
-.tldt.bee{color:var(--bee)}
-.tldt.tony{color:var(--tony2)}
-.tldt.gold{color:var(--gold)}
-.tln{font-size:14px;font-weight:500;color:var(--white);margin-bottom:4px;letter-spacing:-.01em}
-.tlk{font-size:11px;color:var(--mist3);line-height:1.6}
-.tlk strong{color:var(--mist)}
-
-/* ── KV rows ── */
-.kv{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:11px 0;border-bottom:1px solid rgba(255,255,255,.03);
-}
-.kv:last-child{border-bottom:none;padding-bottom:0}
-.kvl{font-size:12px;color:var(--mist3)}
-.kvv{
-  font-family:var(--serif);font-size:16px;
-  font-weight:700;font-style:italic;
-}
-.kvv.bee{color:var(--bee2)}
-.kvv.tony{color:var(--tony2)}
-
-/* ── Placeholder block ── */
-.placeholder{
-  border:1.5px dashed rgba(255,255,255,0.1);
-  border-radius:12px;
-  padding:32px 24px;
-  text-align:center;
-  margin:14px 0;
-  background:rgba(255,255,255,0.015);
-  transition:border-color .2s;
-}
-.placeholder:hover{border-color:rgba(255,255,255,0.2)}
-.placeholder-icon{font-size:28px;margin-bottom:8px;opacity:.5}
-.placeholder-label{
-  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--mist3);font-weight:500;
-}
-
-/* ── Split screen ── */
-.split{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0;border-radius:14px;overflow:hidden;
-  border:1px solid var(--border);margin:14px 0;
-}
-.split-pane{padding:22px}
-.split-pane:first-child{border-right:1px solid var(--border)}
-.split-head{
-  font-size:10px;font-weight:500;letter-spacing:.12em;
-  text-transform:uppercase;margin-bottom:12px;
-  display:flex;align-items:center;gap:8px;
-}
-.split-head.social{color:#6EE7B7}
-.split-head.solo{color:var(--corn)}
-.split-head::before{
-  content:'';width:8px;height:8px;border-radius:50%;flex-shrink:0;
-}
-.split-head.social::before{background:#6EE7B7;box-shadow:0 0 8px #6EE7B7}
-.split-head.solo::before{background:var(--corn);box-shadow:0 0 8px var(--corn)}
-.split-title{
-  font-family:var(--serif);font-size:18px;
-  font-weight:700;font-style:italic;
-  color:var(--white);margin-bottom:8px;letter-spacing:-.02em;
-}
-.split-desc{font-size:11px;color:var(--mist3);line-height:1.65;margin-bottom:14px}
-
-/* ── Bottom nav ── */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(5,12,20,0.96);backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;
-  justify-content:space-between;
-  padding:10px 24px;z-index:200;gap:10px;
-}
-.bn{
-  display:flex;align-items:center;gap:6px;
-  background:none;border:1px solid var(--border);
-  color:var(--mist);font-family:var(--mono);
-  font-size:11px;font-weight:500;
-  padding:8px 16px;border-radius:8px;cursor:pointer;
-  transition:all .2s;flex-shrink:0;letter-spacing:.02em;
-}
-.bn:hover{border-color:var(--border2);color:var(--white);background:rgba(255,255,255,0.04)}
-.bn:disabled{opacity:.2;cursor:not-allowed}
-.bn.home-btn{
-  border-color:rgba(0,194,224,0.2);
-  color:var(--bee2);background:var(--bee3);
-}
-.bn.home-btn:hover{background:rgba(0,194,224,0.18)}
-.bn.primary{
-  background:linear-gradient(135deg,var(--bee),#0090A8);
-  border-color:transparent;color:var(--ink);font-weight:700;
-  box-shadow:0 0 18px rgba(0,194,224,0.22);letter-spacing:.03em;
-}
-.bn.primary:hover{box-shadow:0 0 26px rgba(0,194,224,0.4)}
-.bn.primary.tony-btn{
-  background:linear-gradient(135deg,var(--tony),#A0100A);
-  box-shadow:0 0 18px rgba(232,23,10,0.22);
-}
-.bn.primary.tony-btn:hover{box-shadow:0 0 26px rgba(232,23,10,0.4)}
-.pc-info{
-  font-size:10px;color:var(--mist3);
-  text-align:center;flex:1;min-width:0;
-  letter-spacing:.04em;
-}
-.pc-info strong{
-  color:var(--white);display:block;
-  font-size:11px;margin-bottom:1px;font-weight:500;
-}
-
-/* ══════════════════════ MOBILE ══════════════════════ */
-@media(max-width:640px){
-  .gallery{grid-template-columns:1fr}
-  .gcard{max-height:320px}
-  .two{grid-template-columns:1fr}
-  .split{grid-template-columns:1fr}
-  .split-pane:first-child{border-right:none;border-bottom:1px solid var(--border)}
-  .inner{padding:28px 16px 100px}
-  .kpis{grid-template-columns:1fr 1fr}
-  .nav-center{display:none}
-  .fr{grid-template-columns:24px 1fr}.fk{display:none}
-  .bottom-nav{padding:8px 16px}
-  .bn{font-size:10px;padding:7px 11px}
-  .home-header{padding-top:32px;margin-bottom:44px}
-}
+  @media (max-width: 768px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    header { padding: 14px 20px; }
+    .hero { padding: 100px 20px 80px; }
+    .work-section { padding: 40px 20px 80px; }
+    .about-strip { flex-direction: column; gap: 20px; padding: 32px 20px; }
+    .nav-links { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ══════════ NAV ══════════ -->
-<nav class="nav">
-  <div class="nav-logo" onclick="goHome()">
-    <div class="nav-logo-dot"></div>
-    Portfolio
-    <span class="nav-crumb hidden" id="navCrumb">/ case study</span>
-  </div>
-  <div class="nav-center">
-    <button class="nav-tab active" id="tab-home" onclick="goHome()">Gallery</button>
-    <button class="nav-tab" id="tab-bee" onclick="goView('bee')">BeeAlp</button>
-    <button class="nav-tab" id="tab-tony" onclick="goView('tony')">Tony's Corny</button>
-  </div>
-  <div class="nav-right">
-    <div class="progress-wrap">
-      <div class="progress-bar" id="progressBar" style="width:0%"></div>
-    </div>
-  </div>
-</nav>
+<header>
+  <a href="index.html" class="logo">Ankit Raj</a>
+  <nav class="nav-links">
+    <a href="beealp.html">BeeAlp</a>
+    <a href="tonys.html">Tony's Corny</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-<!-- ══════════════════════════════════════════
-     HOME GALLERY
-     ══════════════════════════════════════════ -->
-<div class="view active" id="view-home">
-  <div id="home">
-    <div class="home-bg"></div>
-    <div class="home-grid-bg"></div>
+<section class="hero">
+  <div class="hero-label">Marketing Portfolio · 2026</div>
+  <h1 class="hero-title">
+    The<br><em>Work.</em>
+  </h1>
+  <p class="hero-sub">Two brand challenges. One thread — strategy-first marketing built around real insight, honest data, and ideas that earn attention.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">GTM Strategy</span>
+    <span class="hero-tag">IMC Planning</span>
+    <span class="hero-tag">Social Media</span>
+    <span class="hero-tag">Market Research</span>
+    <span class="hero-tag">Brand Extension</span>
+    <span class="hero-tag">Crowdfunding</span>
+    <span class="hero-tag">A/B Testing</span>
+    <span class="hero-tag">Budget Allocation</span>
+  </div>
+  <div class="scroll-hint">Scroll <span></span></div>
+</section>
 
-    <div class="home-header">
-      <div class="home-eyebrow">Marketing Case Studies · 2026</div>
-      <h1 class="home-title">
-        <span>Ankit Raj</span>
-        The Work.
-      </h1>
-      <p class="home-sub">Two distinct brand challenges. One strategic thread — mission-driven marketing that earns attention rather than buying it.</p>
-    </div>
+<section class="work-section">
+  <div class="section-label">Case Studies</div>
+  <div class="cards-grid">
 
-    <div class="gallery">
-      <!-- BeeAlp Card -->
-      <div class="gcard bee-card" onclick="goView('bee')">
-        <div class="gcard-visual">
-          <div class="gcard-bg-bee"></div>
-          <div class="gcard-hex"></div>
-          <div class="gcard-icon">🐝</div>
-        </div>
-        <div class="gcard-footer">
-          <div class="gcard-meta">
-            <div class="gcard-tag bee">GTM Strategy · Crowdfunding</div>
-            <div class="gcard-name">BeeAlp</div>
+    <!-- BeeAlp Card -->
+    <a href="beealp.html" class="pcard bee-card">
+      <div class="pcard-visual bee-visual">
+        <div class="bee-visual-inner">
+          <div class="bee-phone-mock">
+            <div class="bee-phone-logo">🐝</div>
           </div>
-          <div class="gcard-chips">
-            <div class="gcard-chip bee">FR · DE · UK</div>
-            <div class="gcard-chip bee">€500K target</div>
-            <div class="gcard-chip bee">Circular Phones</div>
-          </div>
+          <div class="bee-float-tag">€500K Target · Sep 2026</div>
+          <div class="bee-float-stat">642M<span>unused phones in EU</span></div>
         </div>
-        <div class="gcard-arrow">→</div>
       </div>
-
-      <!-- Tony's Card -->
-      <div class="gcard tony-card" onclick="goView('tony')">
-        <div class="gcard-visual">
-          <div class="gcard-bg-tony"></div>
-          <div class="gcard-choc"></div>
-          <div class="gcard-icon tony-ico">🌽</div>
+      <div class="pcard-body">
+        <div class="pcard-type bee">GTM Strategy · Crowdfunding · IMC</div>
+        <div class="pcard-name">BeeAlp</div>
+        <div class="pcard-desc">Full go-to-market strategy for a circular premium smartphone subscription entering France, Germany & UK. €500K crowdfunding campaign — September 2026.</div>
+        <div class="pcard-pills">
+          <span class="pill bee">Market Research</span>
+          <span class="pill bee">AIDA Funnel</span>
+          <span class="pill bee">€200K Budget</span>
+          <span class="pill bee">3-Phase Roadmap</span>
+          <span class="pill bee">Social Strategy</span>
         </div>
-        <div class="gcard-footer">
-          <div class="gcard-meta">
-            <div class="gcard-tag tony">Brand Extension · Social</div>
-            <div class="gcard-name">Tony's Corny</div>
-          </div>
-          <div class="gcard-chips">
-            <div class="gcard-chip tony">Europe Launch</div>
-            <div class="gcard-chip tony">Ethical Snacks</div>
-            <div class="gcard-chip tony">Mission-Led</div>
-          </div>
-        </div>
-        <div class="gcard-arrow">→</div>
+        <div class="pcard-arrow bee">View Case Study →</div>
       </div>
-    </div>
+    </a>
+
+    <!-- Tony's Card -->
+    <a href="tonys.html" class="pcard tony-card">
+      <div class="pcard-visual tony-visual">
+        <div style="position:relative;display:inline-block;">
+          <div class="tony-bag-mock">
+            <div class="tony-bag-text">
+              <div class="t1">TONY'S</div>
+              <div class="t2">CORNY</div>
+            </div>
+          </div>
+          <div class="tony-float-tag">Brand Extension · Europe</div>
+          <div class="tony-float-stat">Mission-Led<span>same standard, new crop</span></div>
+        </div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-type tony">Brand Extension · Social Strategy · Product Design</div>
+        <div class="pcard-name">Tony's Corny</div>
+        <div class="pcard-desc">Brand extension strategy for Tony's Chocolonely entering Europe's salty snack market — applying anti-slavery sourcing to corn. Product design, IMC, and social campaigns.</div>
+        <div class="pcard-pills">
+          <span class="pill tony">Brand Extension</span>
+          <span class="pill tony">Packaging Logic</span>
+          <span class="pill tony">Social Campaigns</span>
+          <span class="pill tony">Mission-Led</span>
+          <span class="pill tony">IMC Strategy</span>
+        </div>
+        <div class="pcard-arrow tony">View Case Study →</div>
+      </div>
+    </a>
+
   </div>
+</section>
+
+<div class="about-strip" id="about">
+  <div class="about-name">Ankit Raj</div>
+  <div class="about-roles">
+    <span class="role-badge">Marketing Strategy</span>
+    <span class="role-badge">Social Media Marketing</span>
+    <span class="role-badge">Market Research</span>
+    <span class="role-badge">IMC Planning</span>
+    <span class="role-badge">Brand Strategy</span>
+    <span class="role-badge">A/B Testing</span>
+    <span class="role-badge">Campaign Management</span>
+    <span class="role-badge">Content Strategy</span>
+    <span class="role-badge">Communication</span>
+  </div>
+  <div class="about-contact">Open to opportunities</div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     BEEALP CASE STUDY
-     ══════════════════════════════════════════ -->
-<div class="view" id="view-bee">
-  <div class="inner">
+<footer>
+  Portfolio · Ankit Raj · 2026 — Built for marketing roles
+</footer>
 
-    <!-- Header -->
-    <div class="pg-header">
-      <div class="pg-eyebrow">
-        <div class="pg-badge bee">1</div>
-        <span class="pg-eyebrow-txt bee">Go-To-Market & Crowdfunding Strategy</span>
-      </div>
-      <h1 class="pg-title">Building the market for a phone<br>that <em class="bee">never needs replacing.</em></h1>
-      <p class="pg-sub">Full IMC strategy for BeeAlp — a circular premium smartphone subscription entering France, Germany and the UK with a €500K crowdfunding launch in September 2026.</p>
-    </div>
-
-    <!-- SECTION 1: Market Opportunity -->
-    <div class="sec bee">Market Opportunity</div>
-    <div class="kpis">
-      <div class="kpi bee"><div class="kpi-n bee">642M</div><div class="kpi-l">Unused smartphones in EU homes</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">85%+</div><div class="kpi-l">Western Europe market penetration</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">2.8 yr</div><div class="kpi-l">Average replacement cycle</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">55%</div><div class="kpi-l">Europeans open to refurbished</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">&lt;5%</div><div class="kpi-l">Subscription segment today — but growing</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">10–15%</div><div class="kpi-l">Annual refurbished market growth</div></div>
-    </div>
-
-    <div class="hl bee">
-      <p><strong>The strategic gap:</strong> No competitor integrates flagship performance + a circular subscription + European data sovereignty. That three-way combination is BeeAlp's defensible white space.</p>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 2: Why People Replace -->
-    <div class="sec bee">The Real Replacement Drivers</div>
-    <p style="font-size:12px;color:var(--mist3);margin-bottom:14px;line-height:1.7">People don't replace phones because they want to. They're pushed into it. Each driver is directly solved by the subscription model.</p>
-    <div class="items">
-      <div class="item"><div class="item-ico bee">🔋</div><div><div class="item-title">Battery degradation — 32% of replacements</div><div class="item-desc">Worn-out battery = forced upgrade. BeeAlp's user-replaceable battery removes this entirely.</div></div></div>
-      <div class="item"><div class="item-ico bee">🐌</div><div><div class="item-title">Performance slowdown — 28% of replacements</div><div class="item-desc">OS updates not optimised for older hardware. Solved with an 8-year software commitment on BeeAlp's dedicated chip.</div></div></div>
-      <div class="item"><div class="item-ico bee">💸</div><div><div class="item-title">Repair costs exceeding device value</div><div class="item-desc">€200 repair on a 2-year-old phone → consumer replaces instead. All-inclusive subscription removes repair bills permanently.</div></div></div>
-    </div>
-
-    <div class="hl bee">
-      <p><strong>Strategic implication:</strong> Lead with <strong>performance and value</strong>, not sustainability. Eco-credentials are a proof point after trust is earned — not the hook.</p>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 3: Competitive Landscape -->
-    <div class="sec bee">Competitive Landscape</div>
-    <div class="tw">
-      <table>
-        <thead>
-          <tr>
-            <th class="bee">Brand</th>
-            <th class="bee">Model</th>
-            <th class="bee">Strength</th>
-            <th class="bee">Critical Weakness</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="strong">Apple</td><td>Ownership</td><td>Ecosystem loyalty</td><td>€1,100+ TCO, planned obsolescence</td></tr>
-          <tr><td class="strong">Samsung</td><td>Ownership</td><td>Display, Android</td><td>Rapid depreciation, software bloat</td></tr>
-          <tr><td class="strong">Fairphone</td><td>Ownership</td><td>Ethics, repairability</td><td>Mid-range only, ~2% market share</td></tr>
-          <tr><td class="strong">Back Market</td><td>Marketplace</td><td>Low price</td><td>Quality lottery, no brand trust</td></tr>
-          <tr><td class="strong">Grover</td><td>Rental</td><td>Flexibility</td><td>High long-term cost, no ownership</td></tr>
-          <tr class="hl-row"><td class="strong">BeeAlp ✦</td><td>Subscription</td><td>Circular + Premium + EU-sovereign</td><td>New brand — trust gap to close</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 4: Target Audience -->
-    <div class="sec bee">Phased Audience Strategy — 8 Years</div>
-    <div class="tl">
-      <div class="tli">
-        <div class="tld bee-full">Y1</div>
-        <div class="tlb">
-          <div class="tldt bee">Years 1–3 · Primary Target</div>
-          <div class="tln">Gen Z & Millennials (18–38)</div>
-          <div class="tlk">Early adopters: subscription-native, most vocal on social, most likely to create content and refer. The engine for organic growth.</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag bee">Flagship performance</span><span class="tag bee">Anti-obsolescence</span><span class="tag bee">Subscription-native</span><span class="tag bee">High UGC output</span>
-          </div>
-        </div>
-      </div>
-      <div class="tli">
-        <div class="tld bee-mid">Y4</div>
-        <div class="tlb">
-          <div class="tldt bee">Years 4–6</div>
-          <div class="tln">Generation X (39–55)</div>
-          <div class="tlk">Once trust is established, Gen X converts on reliability and total cost of ownership logic. Referral-driven conversion.</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag neutral">TCO argument</span><span class="tag neutral">Reliability first</span><span class="tag neutral">Referral-driven</span>
-          </div>
-        </div>
-      </div>
-      <div class="tli">
-        <div class="tld gold">Y7</div>
-        <div class="tlb">
-          <div class="tldt gold">Year 7+</div>
-          <div class="tln">Late Majority & Family Migration</div>
-          <div class="tlk">At €4.99/mo — lowest possible friction. Structured switching incentives, family and colleague migration.</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag gold">Family migration</span><span class="tag gold">€4.99/mo</span><span class="tag gold">Referral rewards</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 5: Value Proposition & Pricing -->
-    <div class="sec bee">Value Proposition & Pricing</div>
-    <div class="hl bee">
-      <p style="font-size:15px;font-weight:700;color:var(--white);font-family:var(--serif);font-style:italic;margin-bottom:6px">"The Never-Ending Premium Smartphone"</p>
-      <p>Stays fast. Costs less every year. Fully protected. Feels completely yours.</p>
-    </div>
-
-    <div class="gap"></div>
-    <div class="card">
-      <div class="kv"><span class="kvl">Activation fee (one-time)</span><span class="kvv bee">€99</span></div>
-      <div class="kv"><span class="kvl">Year 1</span><span class="kvv bee">€24.99/mo</span></div>
-      <div class="kv"><span class="kvl">Year 2</span><span class="kvv bee">€19.99/mo</span></div>
-      <div class="kv"><span class="kvl">Years 3–4</span><span class="kvv bee">€14.99/mo</span></div>
-      <div class="kv"><span class="kvl">Years 5–6</span><span class="kvv bee">€9.99/mo</span></div>
-      <div class="kv"><span class="kvl">Years 7–8</span><span class="kvv bee">€4.99/mo</span></div>
-      <div class="kv" style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px">
-        <span class="kvl" style="color:var(--white);font-weight:500">Total 8-year lifetime value</span>
-        <span class="kvv" style="color:var(--gold)">€925</span>
-      </div>
-    </div>
-    <p style="font-size:10px;color:var(--mist3);margin-top:6px">vs. €1,800+ for two Samsung replacement cycles over the same period</p>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 6: Content Strategy -->
-    <div class="sec bee">Content Strategy — 5 Pillars</div>
-    <div class="items">
-      <div class="item"><div class="item-ico bee">⚡</div><div><div class="item-title">01 — Premium Continuity</div><div class="item-desc">"Year 3 still fast." Benchmarks, before/after updates, real performance data. Proves the core promise without any sustainability claim.</div></div></div>
-      <div class="item"><div class="item-ico bee">👤</div><div><div class="item-title">02 — Phone as Mine</div><div class="item-desc">MyBee Profile UGC. Users share setups → organic content loop. Proves ownership psychology, not rental mentality.</div></div></div>
-      <div class="item"><div class="item-ico bee">🛡️</div><div><div class="item-title">03 — Care Included</div><div class="item-desc">Repair proof. Real stories, 48h turnaround times, zero-downtime testimonials. Shows the safety net working.</div></div></div>
-      <div class="item"><div class="item-ico bee">💶</div><div><div class="item-title">04 — Smart Economics</div><div class="item-desc">Declining cost vs. €900 upgrade cycle. Cost comparison reels, calculators, 8-year ownership breakdowns.</div></div></div>
-      <div class="item"><div class="item-ico bee">♻️</div><div><div class="item-title">05 — Circular Proof</div><div class="item-desc">Lifecycle transparency, never greenwashing. Factory footage, refurbishment stats, component traceability. Facts without preaching.</div></div></div>
-    </div>
-
-    <div class="gap"></div>
-    <div class="sec bee">AIDA Content Funnel</div>
-    <div class="funnel">
-      <div class="fr f1 bee"><div class="fl">A</div><div><div class="fn">Awareness — Educate & attract</div><div class="fd">Circular economy posts · founder story · sovereignty debate · 3–4×/week</div></div><div class="fk bee">LinkedIn · Instagram · X</div></div>
-      <div class="fr f2 bee"><div class="fl">I</div><div><div class="fn">Interest — Prove value</div><div class="fd">Explainer videos · lifecycle breakdown · cost comparisons · 3–4×/week</div></div><div class="fk bee">LinkedIn · Newsletter</div></div>
-      <div class="fr f3 bee"><div class="fl">D</div><div><div class="fn">Desire — Build belonging</div><div class="fd">Prototype reveal · testimonials · community polls · 4×/week</div></div><div class="fk bee">Instagram · Discord</div></div>
-      <div class="fr f4 bee"><div class="fl">A</div><div><div class="fn">Action — Convert backers</div><div class="fd">Launch video · early-bird offers · roadmap · daily during campaign</div></div><div class="fk bee">All channels</div></div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 7: Crowdfunding Roadmap -->
-    <div class="sec bee">Crowdfunding Roadmap — Gate-Based</div>
-    <p style="font-size:12px;color:var(--mist3);margin-bottom:18px;line-height:1.7">Each phase only unlocks when all KPI gates are hit. No phase advances without validated traction — controlling risk while scaling on proof.</p>
-    <div class="tl">
-      <div class="tli">
-        <div class="tld bee-full">P1</div>
-        <div class="tlb">
-          <div class="tldt bee">Now → May 2026 · €1.5M raise</div>
-          <div class="tln">Pre-Seed: Foundation</div>
-          <div class="tlk">Build brand, test market response, validate concept. Thought leadership, micro-campaigns, community seeding.</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag bee">5,000+ email opt-ins</span><span class="tag bee">CTR ≥2%</span><span class="tag bee">Prototype ready</span><span class="tag bee">Partner contracts signed</span>
-          </div>
-        </div>
-      </div>
-      <div class="tli">
-        <div class="tld bee-mid">P2</div>
-        <div class="tlb">
-          <div class="tldt bee">Jun → Aug 2026 · €3.5M raise</div>
-          <div class="tln">Seed: Pre-Campaign Warm-Up</div>
-          <div class="tlk">CE certification, D2C platform live, B2B outreach, influencer activation, pop-ups in 3 cities (Berlin, Paris, London).</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag bee">30,000+ warm contacts</span><span class="tag bee">CE certified</span><span class="tag bee">1 B2B pilot signed</span>
-          </div>
-        </div>
-      </div>
-      <div class="tli">
-        <div class="tld gold">🚀</div>
-        <div class="tlb">
-          <div class="tldt gold">September 2026 · €500K target</div>
-          <div class="tln">Crowdfunding Campaign — 30 Days</div>
-          <div class="tlk">Day 1 target: 40% funded (€200K). PR blitz, podcast circuit, daily content across all channels.</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag gold">€500K raised</span><span class="tag gold">2,000+ backers</span><span class="tag gold">40% on Day 1</span>
-          </div>
-        </div>
-      </div>
-      <div class="tli">
-        <div class="tld bee-dim">A</div>
-        <div class="tlb">
-          <div class="tldt bee">2027 → Series A · €20M</div>
-          <div class="tln">Commercial Scale — 3 EU Markets</div>
-          <div class="tlk">50,000–100,000 subscribers. 76 FTEs. Telecom partnerships. Referral & student pricing. AI app v2.</div>
-          <div class="tags" style="margin-top:9px">
-            <span class="tag neutral">50–100K subs</span><span class="tag neutral">CAC ≤€122</span><span class="tag neutral">Churn &lt;2%</span><span class="tag neutral">NPS &gt;60</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 8: Growth Engines -->
-    <div class="sec bee">Growth Engines</div>
-    <div class="two">
-      <div class="card">
-        <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">🐝 MyBee Profile (UGC Engine)</div>
-        <div style="font-size:11px;color:var(--mist3);line-height:1.65;margin-bottom:10px">Saveable OS layer. Users share setups → organic content loop. Emotional attachment → lower churn. Shifts "phone as service" to "phone as mine."</div>
-        <div class="tags"><span class="tag bee">Organic Instagram</span><span class="tag bee">Lower churn</span><span class="tag bee">Endowment effect</span></div>
-      </div>
-      <div class="card">
-        <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">🔗 Referral System</div>
-        <div style="font-size:11px;color:var(--mist3);line-height:1.65;margin-bottom:10px">Premium rewards, not cash discounts. Referrer gets priority support + early OS access. New customer gets reduced activation fee.</div>
-        <div class="tags"><span class="tag bee">No price dilution</span><span class="tag bee">Service upgrades</span></div>
-      </div>
-    </div>
-    <div class="card gap">
-      <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">🏢 B2B Corporate Channel</div>
-      <div style="font-size:11px;color:var(--mist3);line-height:1.65;margin-bottom:10px">~28% of EU companies provide phones to employees. Corporate kits sold via MEDDIC qualification to HR/IT directors. Bulk deployments = dramatically lower CAC. <strong style="color:var(--white)">Gate: 1 signed B2B pilot required before Series A.</strong></div>
-      <div class="tags"><span class="tag bee">Lower CAC</span><span class="tag bee">Bulk deployments</span><span class="tag bee">Recurring B2B revenue</span></div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 9: Budget & KPIs -->
-    <div class="sec bee">Marketing Budget — 2026</div>
-    <div class="tw">
-      <table>
-        <thead>
-          <tr><th class="bee">Phase</th><th class="bee">Period</th><th class="bee">Production</th><th class="bee">Media</th><th class="bee">Total</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Foundation</td><td>Mar–May</td><td>€19,500</td><td>€7,300</td><td class="strong">€26,800</td></tr>
-          <tr><td>Pre-Campaign</td><td>Jun–Aug</td><td>€30,000</td><td>€25,000</td><td class="strong">€55,000</td></tr>
-          <tr><td>Campaign</td><td>September</td><td>€30,000</td><td>€45,000</td><td class="strong">€75,000</td></tr>
-          <tr><td>Post-Campaign</td><td>Oct–Dec</td><td>€15,200</td><td>€6,000</td><td class="strong">€21,200</td></tr>
-          <tr class="hl-row"><td><strong>Total</strong></td><td>2026</td><td>€101,700</td><td>€88,300</td><td class="strong" style="color:var(--bee2);font-size:13px">€200,000</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="gap"></div>
-    <div class="sec bee">Unit Economics</div>
-    <div class="kpis">
-      <div class="kpi bee"><div class="kpi-n bee">€925</div><div class="kpi-l">8-year LTV per subscriber</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">37%</div><div class="kpi-l">Gross margin at scale</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">7.6×</div><div class="kpi-l">LTV:CAC ratio (€925 / €122)</div></div>
-      <div class="kpi bee"><div class="kpi-n bee">18–24mo</div><div class="kpi-l">Payback period</div></div>
-    </div>
-
-    <div class="dvd"></div>
-    <div class="sec bee">Skills Applied</div>
-    <div class="tags">
-      <span class="tag bee">IMC Strategy</span><span class="tag bee">AIDA Funnel Design</span><span class="tag bee">Audience Segmentation</span>
-      <span class="tag bee">Crowdfunding Strategy</span><span class="tag bee">UGC Systems</span><span class="tag bee">Competitive Intelligence</span>
-      <span class="tag neutral">KPI Framework</span><span class="tag neutral">Budget Allocation</span><span class="tag neutral">B2B Channel Strategy</span>
-      <span class="tag neutral">Brand Voice</span><span class="tag neutral">Referral Architecture</span>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     TONY'S CORNY CASE STUDY
-     ══════════════════════════════════════════ -->
-<div class="view" id="view-tony">
-  <div class="inner">
-
-    <!-- Header -->
-    <div class="pg-header">
-      <div class="pg-eyebrow">
-        <div class="pg-badge tony">2</div>
-        <span class="pg-eyebrow-txt tony">Brand Extension · Social Strategy · Product Design</span>
-      </div>
-      <h1 class="pg-title">From chocolate to corn.<br><em class="tony">Same mission. New crunch.</em></h1>
-      <p class="pg-sub">Brand extension strategy for Tony's Chocolonely entering Europe's salty snack market — applying the same anti-slavery sourcing standards to corn that made the chocolate brand iconic.</p>
-    </div>
-
-    <!-- SECTION 1: Brand Foundation -->
-    <div class="sec tony">Brand Foundation</div>
-    <div class="hl tony">
-      <p><strong>Tony's Chocolonely</strong> — Dutch mission-driven chocolate brand (founded 2005). Campaigns to make "100% slave-free" the norm across the entire chocolate industry, not just their own bars. Founded by journalist Teun van de Keuken after exposing child labour in cocoa.</p>
-    </div>
-
-    <div class="kpis">
-      <div class="kpi tony"><div class="kpi-n tony">2005</div><div class="kpi-l">Founded in Amsterdam</div></div>
-      <div class="kpi tony"><div class="kpi-n tony">100%</div><div class="kpi-l">Slave-free sourcing goal — for the whole industry</div></div>
-      <div class="kpi tony"><div class="kpi-n tony">4</div><div class="kpi-l">Core chocolate variants in market</div></div>
-      <div class="kpi tony"><div class="kpi-n tony">B Corp</div><div class="kpi-l">Certified ethical business</div></div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 2: The Problem -->
-    <div class="sec tony">The Problem — Cocoa & Corn</div>
-    <div class="items">
-      <div class="item"><div class="item-ico tony">⛓️</div><div><div class="item-title">Forced Labour — The Kingpin</div><div class="item-desc">The in-between of the supply chain — dominated by chocolate giants keeping cocoa prices as low as possible — forces farmers into poverty, enabling child and forced labour.</div></div></div>
-      <div class="item"><div class="item-ico tony">👧</div><div><div class="item-title">Child Labour in Corn</div><div class="item-desc">In Guatemala, children are a significant portion of agricultural labour in corn due to economic necessity. Same systemic problem, new crop.</div></div></div>
-      <div class="item"><div class="item-ico tony">💧</div><div><div class="item-title">Water Stress & Crop Vulnerability</div><div class="item-desc">~1/3 of global corn production occurs in high water-stress regions. Unstable yields → income volatility → increased exploitation risk.</div></div></div>
-      <div class="item"><div class="item-ico tony">🔍</div><div><div class="item-title">Zero Transparency</div><div class="item-desc">Corn supply chains lack traceability — preventing visibility into farmer pay, labour conditions, and water practices. Unfairness is invisible.</div></div></div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 3: The Brand Extension -->
-    <div class="sec tony">The Extension — Tony's Corny</div>
-
-    <div class="placeholder">
-      <div class="placeholder-icon">🌽</div>
-      <div class="placeholder-label">[INSERT SLIDE: Tony's Corny bag — full product render, red packaging with blue TONY'S logo, CORNY wordmark, "SHARING IS CARING" tagline, triangle nacho chips visible]</div>
-    </div>
-
-    <div class="hl tony">
-      <p><strong>"A double-thick, stone-ground nacho that delivers an intense toasted corn crunch built to handle the heaviest dips and the hardest truths."</strong></p>
-    </div>
-
-    <div class="gap"></div>
-    <div class="sec tony">Why It Makes Strategic Sense</div>
-    <div class="items">
-      <div class="item"><div class="item-ico tony">🎯</div><div><div class="item-title">Mission continuity — same model, new crop</div><div class="item-desc">Applies Tony's existing anti-slavery sourcing framework to corn. Same standards. Proves the model can scale beyond chocolate.</div></div></div>
-      <div class="item"><div class="item-ico tony">🎉</div><div><div class="item-title">New occasions — social vs. solo</div><div class="item-desc">Chocolate = individual indulgence. Nachos = social snacking. Enters new consumption occasions and baskets without cannibalising the chocolate range.</div></div></div>
-      <div class="item"><div class="item-ico tony">📈</div><div><div class="item-title">Booming category in Europe</div><div class="item-desc">Mexican and tortilla snacks growing fast among young urban Europeans. Perfect cultural moment for a mission-led brand to enter.</div></div></div>
-      <div class="item"><div class="item-ico tony">💼</div><div><div class="item-title">Brand equity transfer</div><div class="item-desc">Tony's has built radical transparency credibility in chocolate. That trust transfers directly to any ethical food product.</div></div></div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 4: Design Logic — Split Screen -->
-    <div class="sec tony">Design Logic — Dual Consumption Modes</div>
-    <p style="font-size:12px;color:var(--mist3);margin-bottom:14px;line-height:1.7">The packaging is engineered for two distinct behavioural triggers — not aesthetic choice, but strategic conversion design.</p>
-
-    <div class="split">
-      <div class="split-pane" style="background:rgba(110,231,183,0.03)">
-        <div class="split-head social">Social Consumption (Default)</div>
-        <div class="split-title">"Pull to Make #Friends"</div>
-        <div class="split-desc">Side panel messaging cues sharing as the expected behaviour. Reaching into a bag at a party becomes an automatic act of generosity — no thought required.</div>
-        <div class="tags">
-          <span class="tag" style="background:rgba(110,231,183,0.08);border-color:rgba(110,231,183,0.2);color:#6EE7B7">Automatic sharing cue</span>
-          <span class="tag" style="background:rgba(110,231,183,0.08);border-color:rgba(110,231,183,0.2);color:#6EE7B7">Party occasion</span>
-          <span class="tag" style="background:rgba(110,231,183,0.08);border-color:rgba(110,231,183,0.2);color:#6EE7B7">Social proof</span>
-        </div>
-        <div style="margin-top:14px;font-size:11px;color:var(--mist3);line-height:1.6">Mirrors the mission: <em style="color:var(--mist)">"We share fair pay with farmers → you share with friends → ethical cycle."</em></div>
-        <div class="placeholder" style="margin-top:14px;padding:20px">
-          <div class="placeholder-icon">📸</div>
-          <div class="placeholder-label">[INSERT SLIDE: Instagram post — friends pulling open bag at outdoor table, laughing]</div>
-        </div>
-      </div>
-      <div class="split-pane" style="background:rgba(245,200,66,0.03)">
-        <div class="split-head solo">Solo Consumption (Permission)</div>
-        <div class="split-title">"Pull to Snack Solo!"</div>
-        <div class="split-desc">Top-of-bag messaging removes social pressure for solo consumption. Explicitly grants permission to enjoy alone — removing the guilt of not sharing.</div>
-        <div class="tags">
-          <span class="tag" style="background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.2);color:var(--corn)">Solo permission</span>
-          <span class="tag" style="background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.2);color:var(--corn)">Movie night occasion</span>
-          <span class="tag" style="background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.2);color:var(--corn)">No guilt</span>
-        </div>
-        <div style="margin-top:14px;font-size:11px;color:var(--mist3);line-height:1.6">Action-oriented copy: <em style="color:var(--mist)">PULL = immediate physical engagement</em> — converts the packaging into a behaviour trigger, not just a container.</div>
-        <div class="placeholder" style="margin-top:14px;padding:20px">
-          <div class="placeholder-icon">🎬</div>
-          <div class="placeholder-label">[INSERT SLIDE: Instagram post — person alone on sofa with bag, headphones on, warm cinematic lighting]</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 5: Tony's 4 Pillars Applied to Corn -->
-    <div class="sec tony">Tony's Model Applied to Corn — 4 Pillars</div>
-    <div class="two">
-      <div class="card">
-        <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">💰 Fair Price</div>
-        <div style="font-size:11px;color:var(--mist3);line-height:1.65">Direct sourcing from cooperatives in Guatemala & Mexico. Cost of production + living income + Fair Share premium. Long-term contracts with a guaranteed price floor.</div>
-      </div>
-      <div class="card">
-        <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">👧 Child Labour — Removed, Not Policed</div>
-        <div style="font-size:11px;color:var(--mist3);line-height:1.65">We don't police farmers — we remove the economic need. Fair income enables adult labour. Zero child labour requirement + NGO verification + school support programmes.</div>
-      </div>
-      <div class="card">
-        <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">💧 Water Resilience</div>
-        <div style="font-size:11px;color:var(--mist3);line-height:1.65">Rainwater harvesting, soil moisture training, drought-resistant seeds. Stable yields = stable income = reduced exploitation risk.</div>
-      </div>
-      <div class="card">
-        <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:8px">🔍 Full Transparency</div>
-        <div style="font-size:11px;color:var(--mist3);line-height:1.65">QR code on every bag shows farmers, impact metrics, and progress. Fully traceable corn — the same standard as the chocolate bars.</div>
-      </div>
-    </div>
-
-    <div class="hl tony">
-      <p><strong>Outcome:</strong> Fair pay. Stable farms. No exploitation. Full transparency. <em style="color:var(--tony2)">Same model. New crop. Same standards.</em></p>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 6: Product Comparison -->
-    <div class="sec tony">Competitive Differentiation</div>
-    <div class="tw">
-      <table>
-        <thead>
-          <tr><th class="tony">Feature</th><th class="tony">Tony's Corny</th><th class="tony">Competition (Doritos, Old El Paso)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="strong">Durability</td><td style="color:#6EE7B7">Double-Thick (Dip-Proof)</td><td>Fragile — breaks in the bag</td></tr>
-          <tr><td class="strong">Ingredients</td><td style="color:#6EE7B7">3 clean ingredients</td><td>Long lists of MSG & chemicals</td></tr>
-          <tr><td class="strong">Integrity</td><td style="color:#6EE7B7">100% Traceable corn</td><td>Opaque, "grey" supply chains</td></tr>
-          <tr><td class="strong">Vibe</td><td style="color:#6EE7B7">Social mission + sharing ritual</td><td>Just another snack</td></tr>
-          <tr class="hl-row-tony"><td class="strong">Why you feel good</td><td style="color:var(--tony2)">Every purchase funds fair pay</td><td>No stance on farmer welfare</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 7: Target Segments -->
-    <div class="sec tony">Target Audience — 3 Segments</div>
-    <div class="items">
-      <div class="item"><div class="item-ico tony">🔄</div><div><div class="item-title">Ethical Switchers</div><div class="item-desc">Better crunch, no guilt. Tired of buying from brands that hide their supply chain. Primary competitor: Doritos, Old El Paso.</div></div></div>
-      <div class="item"><div class="item-ico tony">🎉</div><div><div class="item-title">Social Centrics</div><div class="item-desc">Snacks for the squad. Movie nights, parties, sharing occasions. Primary competitor: Carrefour house brands.</div></div></div>
-      <div class="item"><div class="item-ico tony">❤️</div><div><div class="item-title">Tony's Loyalists</div><div class="item-desc">Love the bar? Try the chip. Giving existing chocolate fans a savoury way to continue supporting the mission.</div></div></div>
-    </div>
-
-    <div class="dvd"></div>
-
-    <!-- SECTION 8: Iconic Assets -->
-    <div class="sec tony">Iconic Brand Assets</div>
-    <div class="two">
-      <div class="card">
-        <div style="font-size:10px;color:var(--mist3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:500">Visual Identity</div>
-        <div class="tags">
-          <span class="tag tony">Bold flat high-contrast palette</span>
-          <span class="tag tony">"Wonky" design language</span>
-          <span class="tag tony">Fair trade logo on name</span>
-          <span class="tag tony">Smiley face = approachability</span>
-        </div>
-      </div>
-      <div class="card">
-        <div style="font-size:10px;color:var(--mist3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:500">Name Rationale</div>
-        <div style="font-size:12px;color:var(--mist);line-height:1.65">Short & tight. Cuts the crap. "Corny" = cheesy (ironic if cheese-flavoured). The wordplay works. <em style="color:var(--white)">"It takes itself seriously — but in a human way."</em></div>
-      </div>
-    </div>
-
-    <div class="gap"></div>
-    <div class="sec tony">Social Media Campaign Direction</div>
-    <div class="funnel">
-      <div class="fr f1 tony"><div class="fl">A</div><div><div class="fn">Awareness — Mission posts + product reveal</div><div class="fd">"No More Lonely" campaign · cross-sell with chocolate bar posts</div></div><div class="fk tony">Instagram · TikTok</div></div>
-      <div class="fr f2 tony"><div class="fl">I</div><div><div class="fn">Interest — Issue education</div><div class="fd">Fair Pay / Child Labour / Water Stress illustrated posts series</div></div><div class="fk tony">Instagram · LinkedIn</div></div>
-      <div class="fr f3 tony"><div class="fl">D</div><div><div class="fn">Desire — Social sharing rituals</div><div class="fd">"Pull to Make #Friends" UGC challenges, party night content</div></div><div class="fk tony">TikTok · Instagram</div></div>
-      <div class="fr f4 tony"><div class="fl">A</div><div><div class="fn">Action — Convert at shelf</div><div class="fd">QR scan-to-impact, retail launch events, in-store activation</div></div><div class="fk tony">All + in-store</div></div>
-    </div>
-
-    <div class="gap"></div>
-    <div class="sec tony">Campaign Creative Placeholders</div>
-    <div class="two">
-      <div class="placeholder">
-        <div class="placeholder-icon">📱</div>
-        <div class="placeholder-label">[INSERT SLIDE: "NO MORE LONELY" Instagram post — bag + chocolate bar side by side, blue background]</div>
-      </div>
-      <div class="placeholder">
-        <div class="placeholder-icon">🌽</div>
-        <div class="placeholder-label">[INSERT SLIDE: "FAIR PAY" illustrated post — hand holding corn with coins, illustrated style, Tony's Corny branding]</div>
-      </div>
-    </div>
-    <div class="two">
-      <div class="placeholder">
-        <div class="placeholder-icon">💔</div>
-        <div class="placeholder-label">[INSERT SLIDE: "CHILD LABOUR" post — illustrated girl in corn field, broken heart icon, "#NO MORE LONELY" hashtag]</div>
-      </div>
-      <div class="placeholder">
-        <div class="placeholder-icon">💧</div>
-        <div class="placeholder-label">[INSERT SLIDE: "WATER STRESS" post — crying corn character, cracked earth background, water drop graphics]</div>
-      </div>
-    </div>
-
-    <div class="dvd"></div>
-    <div class="sec tony">Skills Applied</div>
-    <div class="tags">
-      <span class="tag tony">Brand Extension Strategy</span><span class="tag tony">Social Media Strategy</span><span class="tag tony">Content Creation</span>
-      <span class="tag tony">Mission-Led Marketing</span><span class="tag tony">Packaging Design Logic</span><span class="tag tony">Behavioural Science in Design</span>
-      <span class="tag neutral">Competitive Analysis</span><span class="tag neutral">Audience Segmentation</span><span class="tag neutral">Supply Chain Storytelling</span>
-      <span class="tag neutral">Campaign Concept</span>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══════════ BOTTOM NAV ══════════ -->
-<div class="bottom-nav">
-  <button class="bn" id="btnPrev" onclick="prevSection()" disabled>← Prev</button>
-  <button class="bn home-btn" id="btnHome" onclick="goHome()" style="display:none">↑ Gallery</button>
-  <div class="pc-info">
-    <strong id="pcLabel">Portfolio Gallery</strong>
-    <span id="pcSub">2 case studies</span>
-  </div>
-  <button class="bn primary" id="btnNext" onclick="nextSection()">Explore BeeAlp →</button>
-</div>
-
-<script>
-// ══════════════════════════════
-// STATE
-// ══════════════════════════════
-const VIEWS=['home','bee','tony'];
-let cur=0;
-
-const META={
-  home:{label:'Portfolio Gallery',sub:'2 case studies',next:'Explore BeeAlp →',nextView:'bee',prevView:null},
-  bee:{label:'BeeAlp — GTM Strategy',sub:'Page 1 of 2',next:'Tony\'s Corny →',nextView:'tony',prevView:'home'},
-  tony:{label:"Tony's Corny — Brand Extension",sub:'Page 2 of 2',next:'Back to Gallery →',nextView:'home',prevView:'bee'},
-};
-
-function goHome(){goView('home')}
-function nextSection(){
-  const m=META[VIEWS[cur]];
-  if(m.nextView)goView(m.nextView);
-}
-function prevSection(){
-  const m=META[VIEWS[cur]];
-  if(m.prevView)goView(m.prevView);
-}
-
-function goView(v){
-  // hide all
-  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
-  // show target
-  document.getElementById('view-'+v).classList.add('active');
-  window.scrollTo({top:0,behavior:'instant'});
-  cur=VIEWS.indexOf(v);
-  updateUI(v);
-}
-
-function updateUI(v){
-  // Tabs
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  const tab=document.getElementById('tab-'+v);
-  if(tab){
-    tab.classList.add('active');
-    if(v==='tony')tab.classList.add('tony');
-    else tab.classList.remove('tony');
-  }
-  // Crumb
-  const crumb=document.getElementById('navCrumb');
-  if(v==='home'){crumb.classList.add('hidden')}
-  else{crumb.textContent='/ '+v==='bee'?'BeeAlp':'Tony\'s Corny';crumb.classList.remove('hidden')}
-
-  // Progress bar
-  const bar=document.getElementById('progressBar');
-  const pcts={home:'0%',bee:'50%',tony:'100%'};
-  bar.style.width=pcts[v];
-  bar.className='progress-bar'+(v==='tony'?' tony':'');
-
-  // Bottom nav
-  const m=META[v];
-  document.getElementById('pcLabel').textContent=m.label;
-  document.getElementById('pcSub').textContent=m.sub;
-  const btnNext=document.getElementById('btnNext');
-  btnNext.textContent=m.next||'';
-  btnNext.disabled=!m.nextView;
-  btnNext.className='bn primary'+(v==='tony'?' tony-btn':'');
-  const btnPrev=document.getElementById('btnPrev');
-  btnPrev.disabled=!m.prevView;
-  const btnHome=document.getElementById('btnHome');
-  btnHome.style.display=v==='home'?'none':'flex';
-}
-
-// Init
-goView('home');
-</script>
 </body>
 </html>
